@@ -1,11 +1,11 @@
 
 /* Fonction Menu */
-char menu(){
+/*char menu(){
 
 	int c;
 
 	/* Affichage Menu */
-	printf("1.  \n
+	/*printf("1.  \n
 			2.	\n
 			3.	\n
 			4.	\n
@@ -14,11 +14,11 @@ char menu(){
 
 		c = getchar();
 		/* Suppresion des caracteres dans stdin */
-		if (c != '\n' && c != EOF ){
+		/*if (c != '\n' && c != EOF ){
 			int d;
 			while ( (d = getchar()) != '\n' && d != EOF);
 		}
 
 	}
 return c;
-}
+}*/
