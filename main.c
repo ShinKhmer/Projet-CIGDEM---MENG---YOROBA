@@ -25,6 +25,8 @@ int main(int argc, char **argv)
 		break;
 		case '4' :
 		printf("Choisir Table et place \n");
+		ez_menu();
+
 
 		break;
 		case '5' :
@@ -37,15 +39,7 @@ int main(int argc, char **argv)
 		break;
 		default :
 		printf("Choix par défaut \n");
-        }
-
-
-		if (ez_init() < 0) exit(1);
-
-        ez_window_create (400, 300, "Demo 01: Hello World", NULL);
-
-        ez_main_loop ();
-        exit(0);
+    }
 
     return 0;
 }
