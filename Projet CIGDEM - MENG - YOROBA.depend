@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1513715261 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ez-draw.h"
+	"functions.h"
+
+1396019866 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.h
+	<stdio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<time.h>
+	<sys/time.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xresource.h>
+	<X11/keysym.h>
+	<X11/extensions/Xdbe.h>
+	<windows.h>
+	<windowsx.h>
+	<wingdi.h>
+
+1513712432 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\functions.h
+
+1397116210 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.c
+	"ez-draw.h"
+
