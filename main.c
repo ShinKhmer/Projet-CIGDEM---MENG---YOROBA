@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ez-draw.h"
+#include "ez-draw_functions.h"
 #include "functions.h"
 
 void menu(char *);
