@@ -19,7 +19,7 @@
     }
     else
     {
-        printf("Une erreur s'est produite lors de la connexion à la BDD!");
+        printf("Une erreur s'est produite lors de la connexion a la BDD!");
     }
 }
 
