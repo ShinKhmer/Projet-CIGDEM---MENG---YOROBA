@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "ez-draw.h"
+#include "ez-draw_functions.h"
 #include "functions.h"
+
+void menu(char *);
 
 int main(int argc, char **argv)
 {
-    char menu;
-	menu = menu();
+    char choice;
 
-	switch(menu){
+	menu(&choice);
+
+	switch(choice){
 		case '1' :
 		printf("Choisir son menu \n");
 		break;
@@ -21,6 +26,8 @@ int main(int argc, char **argv)
 		break;
 		case '4' :
 		printf("Choisir Table et place \n");
+		ez_menu();
+
 
 		break;
 		case '5' :
@@ -33,6 +40,7 @@ int main(int argc, char **argv)
 		break;
 		default :
 		printf("Choix par défaut \n");
+    }
 
     return 0;
 }

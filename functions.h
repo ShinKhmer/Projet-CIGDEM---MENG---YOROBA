@@ -1,24 +1,19 @@
 
 /* Fonction Menu */
-char menu(){
+void menu(char *choice){
 
-	int c;
+    int c;
+    int d;
 
 	/* Affichage Menu */
-	printf("1.  \n
-			2.	\n
-			3.	\n
-			4.	\n
-			5.	\n
-			0. to Quit	\n");
+	printf("1.  \n2.	\n3.	\n4.	\n5.	\n0. to Quit	\n");
 
-		c = getchar();
-		/* Suppresion des caracteres dans stdin */
-		if (c != '\n' && c != EOF ){
-			int d;
-			while ( (d = getchar()) != '\n' && d != EOF);
-		}
+    c = getchar();
+    /* Suppresion des caracteres dans stdin */
+    if (c != '\n' && c != '\0' ){
+        while ( (d = getchar()) != '\n' && d != '\0' );
+    }
 
-	}
-return c;
+    *choice = c;
 }
+
