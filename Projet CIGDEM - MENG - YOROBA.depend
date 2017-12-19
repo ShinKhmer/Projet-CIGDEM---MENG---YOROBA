@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1397116210 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.c
+	"ez-draw.h"
+
+1396019866 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.h
+	<stdio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<time.h>
+	<sys/time.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xresource.h>
+	<X11/keysym.h>
+	<X11/extensions/Xdbe.h>
+	<windows.h>
+	<windowsx.h>
+	<wingdi.h>
+
+1513719084 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ez-draw.h"
+	"functions.h"
+
+1513718547 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.h
+	<stdio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<time.h>
+	<sys/time.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xresource.h>
+	<X11/keysym.h>
+	<X11/extensions/Xdbe.h>
+	<windows.h>
+	<windowsx.h>
+	<wingdi.h>
+
+1513719084 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\functions.h
+
+1513718547 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.c
+	"ez-draw.h"
+
