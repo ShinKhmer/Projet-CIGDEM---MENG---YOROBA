@@ -4,7 +4,12 @@
 #include "ez-draw_functions.h"
 #include "functions.h"
 
+
+// PROTOTYPES
 void menu(char *);
+
+
+
 
 int main(int argc, char **argv)
 {
