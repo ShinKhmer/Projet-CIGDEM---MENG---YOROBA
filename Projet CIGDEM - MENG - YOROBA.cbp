@@ -37,6 +37,7 @@
 		<Unit filename="ez-draw.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="ez-draw.h" />
 		<Unit filename="functions.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />

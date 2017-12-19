@@ -3,12 +3,15 @@
 #include "ez-draw.h"
 #include "functions.h"
 
+void menu(char *);
+
 int main(int argc, char **argv)
 {
-    char menu;
-	menu = menu();
+    char choice;
 
-	switch(menu){
+	menu(&choice);
+
+	switch(choice){
 		case '1' :
 		printf("Choisir son menu \n");
 		break;
