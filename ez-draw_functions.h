@@ -55,15 +55,9 @@ void win1_on_key_press (Ez_event *ev)
         case XK_o : ez_window_clear(ev); break;
         case XK_n : ez_quit(); break;
     }
-
 }
 
 
-void win1_on_button_press (Ez_event *ev)             /* Mouse button pressed */
-{
-    printf ("ButtonPress      win = 0x%x  mx = %d  my = %d  mb = %d\n",
-        ez_window_get_id(ev->win), ev->mx, ev->my, ev->mb);
-}
 
 
 
