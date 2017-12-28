@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 28 Décembre 2017 à 21:38
+-- Généré le :  Jeu 28 Décembre 2017 à 22:17
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -35,13 +35,26 @@ CREATE TABLE `ingredient` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `order`
+-- Structure de la table `link_product_ingredient`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE `link_product_ingredient` (
+  `id_product` int(11) NOT NULL,
+  `id_ingredient` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orders`
+--
+
+CREATE TABLE `orders` (
   `id_order` int(11) NOT NULL,
   `total_price` double NOT NULL,
-  `purchase_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `purchase_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_terminal` int(11) NOT NULL,
+  `id_table` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -52,16 +65,17 @@ CREATE TABLE `order` (
 
 CREATE TABLE `place` (
   `id_place` int(11) NOT NULL,
-  `free_place` tinyint(1) DEFAULT NULL
+  `free_place` tinyint(1) DEFAULT NULL,
+  `id_table` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `place`
 --
 
-INSERT INTO `place` (`id_place`, `free_place`) VALUES
-(1, 0),
-(2, 1);
+INSERT INTO `place` (`id_place`, `free_place`, `id_table`) VALUES
+(1, 0, 1),
+(2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +86,8 @@ INSERT INTO `place` (`id_place`, `free_place`) VALUES
 CREATE TABLE `product` (
   `id_product` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `price` double NOT NULL
+  `price` double NOT NULL,
+  `id_order` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,6 +100,13 @@ CREATE TABLE `table_place` (
   `id_table` int(11) NOT NULL,
   `free_table` tinyint(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `table_place`
+--
+
+INSERT INTO `table_place` (`id_table`, `free_table`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -115,9 +137,9 @@ ALTER TABLE `ingredient`
   ADD PRIMARY KEY (`id_ingredient`);
 
 --
--- Index pour la table `order`
+-- Index pour la table `orders`
 --
-ALTER TABLE `order`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id_order`);
 
 --
@@ -154,9 +176,9 @@ ALTER TABLE `terminal`
 ALTER TABLE `ingredient`
   MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `order`
+-- AUTO_INCREMENT pour la table `orders`
 --
-ALTER TABLE `order`
+ALTER TABLE `orders`
   MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `place`
@@ -172,7 +194,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `table_place`
 --
 ALTER TABLE `table_place`
-  MODIFY `id_table` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_table` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `terminal`
 --
