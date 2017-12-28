@@ -10,24 +10,27 @@
 
 int main(int argc, char **argv){
 
-    MYSQL mysql;
+    MYSQL *database = NULL;
+    database = mysql_init(database);
 
-    mysql_init(&mysql);
-
-    mysql_options(&mysql, MYSQL_READ_DEFAULT_GROUP, "option");
-
-
-    if(mysql_real_connect(&mysql, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
-
-        printf("connected\n");
-        mysql_close(&mysql);
-        printf("mysql closed");
-    }else{
-        printf("Une erreur s'est produite lors de la connexion à la BDD!");
+    if(database == NULL){
+        printf("\nProblème lors de l'initialisation de la base de données !\n");
+        return  0;
     }
 
+    mysql_options(database, MYSQL_READ_DEFAULT_GROUP, "option");
+
+    if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
+
+        // TEST REQUETES
+
+        request(database);
 
 
+        mysql_close(database);
+    }else{
+        printf("Une erreur s'est produite lors de la connexion à la BDD!\n");
+    }
 
     //ez_menu();
     return 0;

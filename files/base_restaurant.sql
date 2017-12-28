@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 19 Décembre 2017 à 23:35
+-- Généré le :  Jeu 28 Décembre 2017 à 21:38
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -41,7 +41,7 @@ CREATE TABLE `ingredient` (
 CREATE TABLE `order` (
   `id_order` int(11) NOT NULL,
   `total_price` double NOT NULL,
-  `purchase_time` datetime NOT NULL
+  `purchase_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -55,6 +55,14 @@ CREATE TABLE `place` (
   `free_place` tinyint(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `place`
+--
+
+INSERT INTO `place` (`id_place`, `free_place`) VALUES
+(1, 0),
+(2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +72,7 @@ CREATE TABLE `place` (
 CREATE TABLE `product` (
   `id_product` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `price` float NOT NULL
+  `price` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,8 +93,16 @@ CREATE TABLE `table_place` (
 --
 
 CREATE TABLE `terminal` (
-  `id_terminal` int(11) NOT NULL
+  `id_terminal` int(11) NOT NULL,
+  `staff` tinyint(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `terminal`
+--
+
+INSERT INTO `terminal` (`id_terminal`, `staff`) VALUES
+(1, 1);
 
 --
 -- Index pour les tables exportées
@@ -146,7 +162,7 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT pour la table `place`
 --
 ALTER TABLE `place`
-  MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `product`
 --
@@ -161,7 +177,7 @@ ALTER TABLE `table_place`
 -- AUTO_INCREMENT pour la table `terminal`
 --
 ALTER TABLE `terminal`
-  MODIFY `id_terminal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_terminal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
