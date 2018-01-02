@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <winsock.h>
 #include <MYSQL/mysql.h>
-#include "ez-draw.h"
-#include "ez-draw_functions.h"
-#include "functions.h"
+#include "lib/ez-draw.h"
+#include "lib/ez-draw_functions.h"
+#include "lib/functions.h"
 
 // PROTOTYPES
 
 int main(int argc, char **argv){
 
+    // INITIALISATION BDD
     MYSQL *database = NULL;
     database = mysql_init(database);
 
@@ -20,13 +21,20 @@ int main(int argc, char **argv){
 
     mysql_options(database, MYSQL_READ_DEFAULT_GROUP, "option");
 
+
+    // CONNEXION BDD
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
 
-        // TEST REQUETES
+        //Déclaration des objets
+        MYSQL_RES *result = NULL;
+        MYSQL_ROW row;
 
-        request(database);
+        request(database, result, row);
+
+        insert_db(database, result, row);
 
 
+        mysql_free_result(result);
         mysql_close(database);
     }else{
         printf("Une erreur s'est produite lors de la connexion à la BDD!\n");

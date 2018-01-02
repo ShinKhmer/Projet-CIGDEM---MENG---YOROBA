@@ -38,9 +38,9 @@
 		<Unit filename="ez-draw.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ez-draw.h" />
-		<Unit filename="ez-draw_functions.h" />
-		<Unit filename="functions.h" />
+		<Unit filename="lib/ez-draw.h" />
+		<Unit filename="lib/ez-draw_functions.h" />
+		<Unit filename="lib/functions.h" />
 		<Unit filename="libmysql.dll" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
