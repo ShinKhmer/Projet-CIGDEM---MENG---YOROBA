@@ -10,7 +10,7 @@
 /* To debug, define environment variable EZ_IMAGE_DEBUG */
 
 #define EZ_PRIVATE_DEFS 1
-#include "ez-draw.h"
+#include "lib/ez-draw.h"
 
 /* Contains internal parameters of ez-draw.c */
 Ez_X ezx;
