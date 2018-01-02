@@ -16,6 +16,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-Wall -lgdi32" />
+					<Add library="../../../../../MinGW/lib/libmysqlclient.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -38,7 +39,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ez-draw.h" />
+		<Unit filename="ez-draw_functions.h" />
 		<Unit filename="functions.h" />
+		<Unit filename="libmysql.dll" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
