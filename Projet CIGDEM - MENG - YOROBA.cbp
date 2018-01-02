@@ -34,6 +34,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../../../../../../Program Files (x86)/CodeBlocks/libmysql.dll" />
 		<Unit filename="ez-draw.c">
 			<Option compilerVar="CC" />
 		</Unit>

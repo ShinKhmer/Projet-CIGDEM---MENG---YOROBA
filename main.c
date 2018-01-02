@@ -8,12 +8,19 @@
 
 // Connection à la BDD
 
+
+void menu(char *);
+
+int main(int argc, char **argv)
 {
+
+// Connexion à la BDD
+
     MYSQL mysql;
     mysql_init(&mysql);
     mysql_options(&mysql,MYSQL_READ_DEFAULT_GROUP,"option");
 
-    if(mysql_real_connect(&mysql,"host","root","","base_restaurant",0,NULL,0))
+    if(mysql_real_connect(&mysql,"localhost","root","","base_restaurant",0,NULL,0))
     {
         mysql_close(&mysql);
     }
@@ -21,16 +28,9 @@
     {
         printf("Une erreur s'est produite lors de la connexion a la BDD!");
     }
-}
 
 
 
-
-
-void menu(char *);
-
-int main(int argc, char **argv)
-{
     char choice;
 
 	menu(&choice);
