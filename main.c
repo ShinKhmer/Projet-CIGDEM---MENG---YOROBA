@@ -40,6 +40,6 @@ int main(int argc, char **argv){
         printf("Une erreur s'est produite lors de la connexion à la BDD!\n");
     }
 
-    //ez_menu();
+    ez_menu();
     return 0;
 }
