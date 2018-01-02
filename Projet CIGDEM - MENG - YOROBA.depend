@@ -19,13 +19,16 @@
 	<windowsx.h>
 	<wingdi.h>
 
-1513719084 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\main.c
+1514905782 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\main.c
 	<stdio.h>
 	<stdlib.h>
+	<winsock.h>
+	<MYSQL/mysql.h>
 	"ez-draw.h"
+	"ez-draw_functions.h"
 	"functions.h"
 
-1513718547 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.h
+1514661843 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.h
 	<stdio.h>
 	<stdio.h>
 	<stdlib.h>
@@ -42,9 +45,9 @@
 	<windowsx.h>
 	<wingdi.h>
 
-1513719084 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\functions.h
+1514905782 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\functions.h
 
-1513718547 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.c
+1514661843 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.c
 	"ez-draw.h"
 
 1514495590 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
@@ -59,4 +62,6 @@
 1513730505 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw_functions.h
 
 1513725510 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\functions.h
+
+1514905782 c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw_functions.h
 
