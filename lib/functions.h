@@ -6,9 +6,10 @@
 // 4.
 void terminal_print_menu(int *choice){
     printf("\n===== TERMINAL MANAGEMENT =====\n\n");
-    printf("View available ingredients in reserve\n");   // choice 0
-    printf("Add ingredients in reserve\n");                // choice 1
-    printf("Add menu\n");                                        // choice 2
+    printf("1. View available ingredients in reserve\n");       // choice 0
+    printf("2. Add ingredients in reserve\n");                  // choice 1
+    printf("3. Add menu\n");                                    // choice 2
+    printf("4. Power off\n");                                   // choice 9
     printf("\nChoice:\n");
     scanf("%d", choice);
     system("cls");
@@ -21,7 +22,7 @@ void terminal_print_menu(int *choice){
 
 /* Fonctions BDD */
 
-void request(MYSQL *db, MYSQL *res, MYSQL_ROW row){
+void request(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
 
     unsigned int i = 1;
     unsigned int number_champs = 0;
@@ -41,7 +42,7 @@ void request(MYSQL *db, MYSQL *res, MYSQL_ROW row){
     }
     else{
         //Tant qu'il y a des résultats
-        while(row = mysql_fetch_row(res)){
+        while(row == mysql_fetch_row(res)){
 
             lengths = mysql_fetch_lengths(res);
 
@@ -54,16 +55,12 @@ void request(MYSQL *db, MYSQL *res, MYSQL_ROW row){
 
 }
 
-void insert_db(MYSQL *db, MYSQL *res, MYSQL_ROW row){
-    unsigned int i = 1;
-    unsigned int number_champs = 0;
+void insert_db(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
 
-    mysql_query(db, "UPDATE INGREDIENT SET quantity=20 WHERE name='tomate'");
+    mysql_query(db, "UPDATE INGREDIENT SET quantity=12 WHERE name='tomate'");
 
-    check_change_db(db);
+    printf("\nAdd ingredients: %lu", (unsigned long)mysql_affected_rows(db));
+
 }
 
 
-void check_change_db(MYSQL *db){
-    printf("%ld", mysql_affected_rows(db));
-}

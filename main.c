@@ -27,18 +27,18 @@ int main(int argc, char **argv){
 
         // Déclaration des objets
         MYSQL_RES *result = NULL;
-        MYSQL_ROW row;
+        MYSQL_ROW row = 0;
 
 
         //Menu
         while(choice != 9){
-            terminal_print_menu(&choice);      // Afficher les printf du menu
+            terminal_print_menu(&choice);      // view menu instructions
             switch(choice){
-                case 0:     request(database, result, row);
+                case 0:     //request(database, result, row);
                             break;
                 case 1:
                             break;
-                case 2:
+                case 2:     insert_db(database, result, row);
                             break;
                 case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
                             break;
@@ -47,7 +47,7 @@ int main(int argc, char **argv){
         }
 
 
-        insert_db(database, result, row);
+
 
 
         mysql_free_result(result);
