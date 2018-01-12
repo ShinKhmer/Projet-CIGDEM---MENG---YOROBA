@@ -47,14 +47,13 @@
 1513718547 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.c
 	"ez-draw.h"
 
-1514740917 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
+1515798148 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
 	<stdio.h>
 	<stdlib.h>
 	<winsock.h>
 	<MYSQL/mysql.h>
-	"lib/ez-draw.h"
-	"lib/ez-draw_functions.h"
-	"lib/functions.h"
+	<gtk/gtk.h>
+	"lib\functions.h"
 
 1513730505 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw_functions.h
 
@@ -79,5 +78,5 @@
 
 1514740192 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\ez-draw_functions.h
 
-1514742690 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions.h
+1515798167 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions.h
 

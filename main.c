@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <winsock.h>
 #include <MYSQL/mysql.h>
-#include "lib/ez-draw.h"
-#include "lib/ez-draw_functions.h"
-#include "lib/functions.h"
-
+#include <gtk/gtk.h>
+#include "lib\functions.h"
 // PROTOTYPES
 
 int main(int argc, char **argv){
+
+    int choice = 0;
 
     // INITIALISATION BDD
     MYSQL *database = NULL;
     database = mysql_init(database);
 
     if(database == NULL){
-        printf("\nProblème lors de l'initialisation de la base de données !\n");
+        printf("\nProblem while initializing database !\n");
         return  0;
     }
 
@@ -25,11 +25,27 @@ int main(int argc, char **argv){
     // CONNEXION BDD
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
 
-        //Déclaration des objets
+        // Déclaration des objets
         MYSQL_RES *result = NULL;
         MYSQL_ROW row;
 
-        request(database, result, row);
+
+        //Menu
+        while(choice != 9){
+            terminal_print_menu(&choice);      // Afficher les printf du menu
+            switch(choice){
+                case 0:     request(database, result, row);
+                            break;
+                case 1:
+                            break;
+                case 2:
+                            break;
+                case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
+                            break;
+                default:    break;
+            }
+        }
+
 
         insert_db(database, result, row);
 
@@ -37,7 +53,7 @@ int main(int argc, char **argv){
         mysql_free_result(result);
         mysql_close(database);
     }else{
-        printf("Une erreur s'est produite lors de la connexion à la BDD!\n");
+        printf("Problem while connecting to database !\n");
     }
 
     //ez_menu();

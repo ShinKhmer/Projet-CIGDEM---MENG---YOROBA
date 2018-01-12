@@ -1,5 +1,19 @@
 
 /* Fonction Menu */
+// 1. Afficher ingrédients
+// 2. Ajouter ingrédients
+// 3. Ajouter menu - lié aux ingrédients
+// 4.
+void terminal_print_menu(int *choice){
+    printf("\n===== TERMINAL MANAGEMENT =====\n\n");
+    printf("View available ingredients in reserve\n");   // choice 0
+    printf("Add ingredients in reserve\n");                // choice 1
+    printf("Add menu\n");                                        // choice 2
+    printf("\nChoice:\n");
+    scanf("%d", choice);
+    system("cls");
+    printf("===== RESULT =====\n");
+}
 
 
 
@@ -23,7 +37,7 @@ void request(MYSQL *db, MYSQL *res, MYSQL_ROW row){
     number_champs = mysql_num_fields(res);
 
     if(res == NULL){
-        printf("Il n'y a pas de résultat dans la table place\n");
+        printf("There is no result\n");
     }
     else{
         //Tant qu'il y a des résultats
@@ -47,7 +61,6 @@ void insert_db(MYSQL *db, MYSQL *res, MYSQL_ROW row){
     mysql_query(db, "UPDATE INGREDIENT SET quantity=20 WHERE name='tomate'");
 
     check_change_db(db);
-
 }
 
 
