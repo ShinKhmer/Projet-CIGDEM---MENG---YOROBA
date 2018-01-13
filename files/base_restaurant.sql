@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 28 Décembre 2017 à 22:17
+-- Généré le :  Sam 13 Janvier 2018 à 01:58
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -31,6 +31,42 @@ CREATE TABLE `ingredient` (
   `name` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `ingredient`
+--
+
+INSERT INTO `ingredient` (`id_ingredient`, `name`, `quantity`) VALUES
+(1, 'eggs', 10),
+(2, 'pork', 10),
+(3, 'noodles', 10),
+(4, 'soya sauce', 10),
+(5, 'mushroom', 10),
+(6, 'rice', 10),
+(7, 'morue', 10),
+(8, 'chicken', 10),
+(9, 'beef', 10),
+(10, 'vegetables', 10),
+(11, 'donut', 10),
+(12, 'seafood', 10),
+(13, 'octopus', 10),
+(14, 'potato', 10),
+(15, 'ketchup', 10),
+(16, 'salmon', 10),
+(17, 'algae', 10),
+(18, 'tofu', 10),
+(19, 'chive', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `link_orders_product`
+--
+
+CREATE TABLE `link_orders_product` (
+  `id_order` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -86,8 +122,7 @@ INSERT INTO `place` (`id_place`, `free_place`, `id_table`) VALUES
 CREATE TABLE `product` (
   `id_product` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `price` double NOT NULL,
-  `id_order` int(11) NOT NULL
+  `price` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -137,6 +172,12 @@ ALTER TABLE `ingredient`
   ADD PRIMARY KEY (`id_ingredient`);
 
 --
+-- Index pour la table `link_orders_product`
+--
+ALTER TABLE `link_orders_product`
+  ADD PRIMARY KEY (`id_order`,`id_product`);
+
+--
 -- Index pour la table `orders`
 --
 ALTER TABLE `orders`
@@ -174,7 +215,7 @@ ALTER TABLE `terminal`
 -- AUTO_INCREMENT pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `orders`
 --
