@@ -1,3 +1,7 @@
+// PROTOTYPES
+int search_db(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
+
+
 /* Fonction Menu */
 // 1. Afficher ingrédients
 // 2. Ajouter ingrédients
@@ -95,12 +99,12 @@ void insert_db(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
         strcat(update, name);
         strcat(update, "'");
         mysql_query(db, update);
-        printf("\Modify ingredient: %lu\n", (unsigned long)mysql_affected_rows(db));
+        printf("\nModify ingredient: %lu\n", (unsigned long)mysql_affected_rows(db));
     }
 }
 
 
-int search_db(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char name[50]){
+int search_db(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name){
     unsigned int i = 1;
     unsigned int number_champs = 0;
     char request[50] = "SELECT name FROM INGREDIENT WHERE name='";
