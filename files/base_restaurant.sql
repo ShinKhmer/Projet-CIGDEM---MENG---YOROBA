@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 28 Décembre 2017 à 22:17
+-- Généré le :  Sam 13 Janvier 2018 à 00:50
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -31,6 +31,15 @@ CREATE TABLE `ingredient` (
   `name` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `ingredient`
+--
+
+INSERT INTO `ingredient` (`id_ingredient`, `name`, `quantity`) VALUES
+(1, 'salade', 50),
+(2, 'tomate', 14),
+(3, 'oignon', 50);
 
 -- --------------------------------------------------------
 
@@ -174,7 +183,7 @@ ALTER TABLE `terminal`
 -- AUTO_INCREMENT pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ingredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `orders`
 --

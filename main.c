@@ -26,31 +26,32 @@ int main(int argc, char **argv){
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
 
         // Déclaration des objets
-        MYSQL_RES *result = NULL;
-        MYSQL_ROW row = 0;
+
+        MYSQL_ROW row;
+        //request(database, result, row);
 
 
         //Menu
         while(choice != 9){
-            terminal_print_menu(&choice);      // view menu instructions
+            choice = terminal_print_menu();      // view menu instructions
+            MYSQL_RES *result = NULL;
             switch(choice){
-                case 0:     //request(database, result, row);
+                case 0:
+                            request(database, result, row);
+
                             break;
                 case 1:
                             break;
-                case 2:     insert_db(database, result, row);
+                case 2:     insert_db(database);
                             break;
                 case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
                             break;
                 default:    break;
             }
+            mysql_free_result(result);
         }
 
 
-
-
-
-        mysql_free_result(result);
         mysql_close(database);
     }else{
         printf("Problem while connecting to database !\n");
