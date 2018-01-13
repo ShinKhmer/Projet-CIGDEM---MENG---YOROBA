@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <winsock.h>
 #include <MYSQL/mysql.h>
 #include <gtk/gtk.h>
@@ -26,23 +27,23 @@ int main(int argc, char **argv){
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
 
         // Déclaration des objets
-
-        MYSQL_ROW row;
+        MYSQL_RES *result = NULL;
+        MYSQL_ROW row = NULL;
         //request(database, result, row);
 
 
         //Menu
         while(choice != 9){
             choice = terminal_print_menu();      // view menu instructions
-            MYSQL_RES *result = NULL;
-            switch(choice){
-                case 0:
-                            request(database, result, row);
 
+            switch(choice){
+                case 0:     request(database, result, row);
                             break;
-                case 1:
+                case 1:     insert_db(database, result, row);
                             break;
-                case 2:     insert_db(database);
+                case 2:
+                            break;
+                case 8:     // Power on, open terminals with gtk
                             break;
                 case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
                             break;
