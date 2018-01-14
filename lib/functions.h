@@ -1,29 +1,28 @@
 // PROTOTYPES
 int search_db_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
+int recuperation_id_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
 void add_db_ingredient(MYSQL *, char *, char *);
 void update_db_ingredient(MYSQL *, char *, char *);
 
 int choose_product(MYSQL *, MYSQL_RES *, MYSQL_ROW , int );
 void add_db_product(MYSQL *db, char *, char *);
-void link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
+void link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, int);
+
+void add_db_link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, int, int);
 
 void fgets_correct(char *);
 
 
 /* Fonction Menu */
-// 1. View ingredients
-// 2. Add or modify ingredients
-// 3. Add menu
-// 8. Power on terminals
-// 9. Power off terminals
 int terminal_print_menu(){
     int choice = 0;
 
     printf("\n===== TERMINAL MANAGEMENT =====\n\n");
     printf("0. View available ingredients in reserve\n");       // choice 0
     printf("1. Add ingredients in reserve\n");                  // choice 1
-    printf("2. Add menu\n");                                    // choice 2
-    printf("3. Link ingredients to menu\n");
+    printf("2. View available products\n");                     // choice 2
+    printf("3. Add products\n");                                // choice 3
+    printf("4. Link ingredients to menu\n");                    // choice 4
     printf("8. Power on\n");                                    // choice 8
     printf("9. Power off\n");                                   // choice 9
     printf("\nChoice:\n");
@@ -160,9 +159,6 @@ void update_db_ingredient(MYSQL *db, char *name, char *number){
 void create_products(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     char name[50];
     char price[10];
-    int i = 0;
-    int choice = 0;
-    int number = 0;
 
     fflush(stdin);
     printf("Insert name of the new product :\n");
@@ -175,17 +171,6 @@ void create_products(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     printf("\nname: %s - price : %s\n", name, price);
 
     add_db_product(db, name, price);
-
-    printf("Would you want to link ingredients to this product ?\n");
-    while(choice != 1 && choice != 2){
-        printf("1. Yes\n2. No\n");
-        scanf("%d", &choice);
-    }
-
-    if(choice == 1){
-        printf("\nLINK STARTO !\n");
-        link_product_ingredient(db, res, row, name);
-    }
 }
 
 
@@ -225,9 +210,7 @@ int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
         }
     }
 
-    choice_product = choose_product(db, res, row, line-1);
-
-    return choice_product;
+    return (line - 1);
 }
 
 int choose_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int line){
@@ -254,15 +237,55 @@ void add_db_product(MYSQL *db, char *name, char *price){
     printf("\nAdd product: %lu\n", (unsigned long)mysql_affected_rows(db));
 }
 
-/*void search_db_product(MYSQL *db, char *name){
-    unsigned int i = 1;
-    unsigned int number_champs = 0;
-    char request[50] = "SELECT * FROM PRODUCT WHERE name='";
-    int cnt = 0;
 
-    strcat(request, name);
+
+void link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_product){
+
+    // name_product <-> table product
+    char ingredient[50];
+    int number = 0;
+    int i = 0;
+    int check_ingredient = 0;   // if check_ingredient > 0 : ok | if check_ingredient == 0 : not ok
+    int id_ingredient = 0;
+
+    printf("\nHow many ingredients would you want to add ?\n");
+    scanf("%d", &number);
+
+    printf("\nnumber: %d\n", number);
+
+    fflush(stdin);
+    for(i = 0; i < number; i++){
+            check_ingredient = 0;
+        while(check_ingredient == 0){
+            printf("\nType the ingredient #%d (type help for having a look at the ingredients):\n", i);
+            fgets(ingredient, 50, stdin);
+            fgets_correct(ingredient);
+            check_ingredient = search_db_ingredient(db, res, row, ingredient);
+            if(check_ingredient > 0){
+                id_ingredient = recuperation_id_ingredient(db, res, row, ingredient);
+                add_db_link_product_ingredient(db, res, row, id_product, id_ingredient);
+            }
+            else if(strcmp(ingredient, "help") == 0){
+                request(db, res, row);
+            }
+            else{
+                printf("\nPlease type an existing ingredient !\n");
+            }
+        }
+    }
+}
+
+
+int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name_ingredient){
+    unsigned int i = 0;
+    unsigned int number_champs = 0;
+    unsigned long *lengths;
+    int id_ingredient = 0;
+    char request[50] = "SELECT id_ingredient FROM INGREDIENT WHERE name='";
+    char string_res[5];
+
+    strcat(request, name_ingredient);
     strcat(request, "'");
-    // request = "SELECT name FROM INGREDIENT WHERE name='{name}'"
 
     // Request
     mysql_query(db, request);
@@ -279,35 +302,32 @@ void add_db_product(MYSQL *db, char *name, char *price){
     else{
         // While there is any result
         while( (row = mysql_fetch_row(res)) ){
-            for(i = 1; i <= number_champs; i++){
-                cnt++;
-            }
+            lengths = mysql_fetch_lengths(res);
+            strcpy(string_res, row[i]);
+            printf("\n");
+            i++;
         }
     }
-    return cnt;
-}*/
+    id_ingredient = atoi(string_res);
 
-
-void link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name_product){
-
-    // name_product <-> table product
-    char ingredient[50];
-    int number = 0;
-    int i = 0;
-
-    printf("How many ingredients would you want to add ?\n");
-    scanf("%d", &number);
-
-    printf("\nnumber: %d\n", number);
-
-    for(i = 0; i < number; i++){
-        printf("Insert the ingredient #%d :\n", i);
-        fgets(ingredient, 50, stdin);
-        fgets_correct(ingredient);
-        printf("%s", ingredient);
-    }
+    return id_ingredient;
 }
 
+void add_db_link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_product, int id_ingredient){
+    char add[200] = "INSERT INTO LINK_PRODUCT_INGREDIENT VALUES(";
+    char string_id_product[5];
+    char string_id_ingredient[5];
+
+    sprintf(string_id_product, "%d", id_product);
+    sprintf(string_id_ingredient, "%d", id_ingredient);
+
+    strcat(add, string_id_product);
+    strcat(add, ", ");
+    strcat(add, string_id_ingredient);
+    strcat(add, ")");
+    mysql_query(db, add);
+    printf("\nAdd product: %lu\n", (unsigned long)mysql_affected_rows(db));
+}
 
 
 

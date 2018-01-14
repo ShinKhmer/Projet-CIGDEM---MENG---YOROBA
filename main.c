@@ -11,6 +11,7 @@ int main(int argc, char **argv){
 
     int choice = 0;
     int choice_product = 0;
+    int line = 0;
     char name[50];
 
     // INITIALISATION BDD
@@ -46,11 +47,13 @@ int main(int argc, char **argv){
                             break;
                 case 1:     insert_ingredients(database, result, row);
                             break;
-                case 2:     create_products(database, result, row);
+                case 2:     view_product(database, result, row);
                             break;
-                case 3:     choice_product = view_product(database, result, row);
-                            printf("\nchoice_product: %d", choice_product);
-                            //link_product_ingredient(database, result, row, name);
+                case 3:     create_products(database, result, row);
+                            break;
+                case 4:     line = view_product(database, result, row);
+                            choice_product = choose_product(database, result, row, line);
+                            link_product_ingredient(database, result, row, choice_product);
                             break;
                 case 8:     // Power on, open terminals with gtk
                             break;
