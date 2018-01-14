@@ -17,13 +17,6 @@ int main(int argc, char **argv){
     GtkWidget *button_box;
     GtkWidget *gtk_places_sidebar_new (void);
 
-    typedef struct _GtkPlacesSidebar{
-        gboolean local-only;
-        Gfile * location;
-        GtkPlacesOpenFlags open-flags;
-
-    } GtkPlacesSidebar;
-
     int status;
     int choice = 0;
 
