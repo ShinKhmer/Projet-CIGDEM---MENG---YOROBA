@@ -41,6 +41,7 @@
 		<Unit filename="lib/ez-draw.h" />
 		<Unit filename="lib/ez-draw_functions.h" />
 		<Unit filename="lib/functions.h" />
+		<Unit filename="lib/gtk_functions.h" />
 		<Unit filename="libmysql.dll" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
