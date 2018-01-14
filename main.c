@@ -10,6 +10,8 @@
 int main(int argc, char **argv){
 
     int choice = 0;
+    int choice_product = 0;
+    char name[50];
 
     // INITIALISATION BDD
     MYSQL *database = NULL;
@@ -29,19 +31,26 @@ int main(int argc, char **argv){
         // Déclaration des objets
         MYSQL_RES *result = NULL;
         MYSQL_ROW row = NULL;
-        //request(database, result, row);
-
 
         //Menu
+        // 0. View ingredients
+        // 1. Add or modify ingredients
+        // 2. Add menu
+        // 8. Power on terminals
+        // 9. Power off terminals
         while(choice != 9){
             choice = terminal_print_menu();      // view menu instructions
 
             switch(choice){
                 case 0:     request(database, result, row);
                             break;
-                case 1:     insert_db(database, result, row);
+                case 1:     insert_ingredients(database, result, row);
                             break;
-                case 2:
+                case 2:     create_products(database, result, row);
+                            break;
+                case 3:     choice_product = view_product(database, result, row);
+                            printf("\nchoice_product: %d", choice_product);
+                            //link_product_ingredient(database, result, row, name);
                             break;
                 case 8:     // Power on, open terminals with gtk
                             break;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 13 Janvier 2018 à 01:58
+-- Généré le :  Sam 13 Janvier 2018 à 02:54
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -79,6 +79,57 @@ CREATE TABLE `link_product_ingredient` (
   `id_ingredient` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `link_product_ingredient`
+--
+
+INSERT INTO `link_product_ingredient` (`id_product`, `id_ingredient`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(2, 1),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 7),
+(3, 1),
+(3, 3),
+(3, 4),
+(3, 5),
+(3, 9),
+(4, 6),
+(4, 8),
+(5, 7),
+(5, 8),
+(6, 3),
+(6, 4),
+(6, 9),
+(6, 10),
+(7, 10),
+(7, 11),
+(7, 12),
+(8, 1),
+(8, 13),
+(8, 14),
+(9, 1),
+(9, 6),
+(9, 15),
+(10, 4),
+(10, 6),
+(10, 16),
+(11, 1),
+(11, 2),
+(11, 6),
+(12, 2),
+(12, 6),
+(12, 17),
+(12, 18),
+(13, 17),
+(13, 18),
+(13, 19);
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +175,25 @@ CREATE TABLE `product` (
   `name` varchar(50) NOT NULL,
   `price` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`id_product`, `name`, `price`) VALUES
+(1, 'ramen pork', 16),
+(2, 'ramen fish', 16),
+(3, 'ramen beef', 16),
+(4, 'chick and rice', 12),
+(5, 'fish and rice', 12),
+(6, 'yakisoba', 14),
+(7, 'tempura', 9),
+(8, 'oden', 11),
+(9, 'omuraisu', 12),
+(10, 'Sushi', 3),
+(11, 'katsudon', 8),
+(12, 'onigiri', 15),
+(13, 'soup miso', 5);
 
 -- --------------------------------------------------------
 
@@ -230,7 +300,7 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `table_place`
 --
