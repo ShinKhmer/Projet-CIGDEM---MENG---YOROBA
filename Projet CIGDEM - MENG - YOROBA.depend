@@ -81,10 +81,10 @@
 
 1515810975 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions.h
 
-1515631202 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\ez-draw.c
+1515940552 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\ez-draw.c
 	"lib/ez-draw.h"
 
-1515631202 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\ez-draw.h
+1515940552 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\ez-draw.h
 	<stdio.h>
 	<stdio.h>
 	<stdlib.h>
@@ -101,7 +101,7 @@
 	<windowsx.h>
 	<wingdi.h>
 
-1515882726 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\main.c
+1515943617 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -110,5 +110,5 @@
 	<gtk/gtk.h>
 	"lib\functions.h"
 
-1515879920 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\functions.h
+1515940557 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\functions.h
 
