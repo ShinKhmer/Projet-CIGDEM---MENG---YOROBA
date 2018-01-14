@@ -1,31 +1,11 @@
-// GTK Function
 // PROTOTYPES
-static void activate (GtkApplication* app,gpointer user_data);
+void createWinGTK(GtkWidget *window);
 
-
-/*
-//Bouton Commencez
-static void activate (GtkApplication* app,gpointer user_data)
-{
-  GtkWidget *window;
-  GtkWidget *button;
-  GtkWidget *button_box;
-  int status;
-
-  window = gtk_application_window_new (app);
-  gtk_window_set_title (GTK_WINDOW (window), "Bienvenue chez CigMenYo");
-  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
-  gtk_widget_show_all (window);
-  button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_container_add (GTK_CONTAINER (window), button_box);
-
-  button = gtk_button_new_with_label ("Commencez");
- // g_signal_connect (button, "clicked", G_CALLBACK (fonction name), NULL);
-  g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
-  gtk_container_add (GTK_CONTAINER (button_box), button);
-  gtk_widget_show_all (window);
-
-
-return status;
+//Creation fenetre , soucis ici au pasage en fonction
+void createWinGTK(GtkWidget *window){
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
+    gtk_window_set_default_size(GTK_WINDOW(window), 1280, 720); /** DIMENSION DE LA FENETRE **/
+    gtk_window_set_title(GTK_WINDOW(window), "CIGMENYO"); /** TITRE DE LA FENETRE **/
 }
-*/
+

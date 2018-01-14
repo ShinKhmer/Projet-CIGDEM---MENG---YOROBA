@@ -7,21 +7,20 @@
 #include "lib\functions.h"
 #include "lib\gtk_functions.h"
 
-
-
-int main(int argc, char **argv){
-
-    // INIT GTK
+// INIT GTK
     GtkWidget *window;
     GtkWidget *vbox;
     GtkWidget *notebook;
     GtkWidget *vbox2;
     GtkWidget *vbox3;
+    GtkWidget *vbox4;
+    GtkWidget *vbox5;
     GtkWidget *array;
     GtkWidget *button;
-
     GtkWidget *pTabLabel;
     gchar *sTabLabel;
+
+int main(int argc, char **argv){
 
     // Variable
     int status;
@@ -39,13 +38,6 @@ int main(int argc, char **argv){
     }
 
     mysql_options(database, MYSQL_READ_DEFAULT_GROUP, "option");
-
-    /* //GTK WINDOW
-    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
-    g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
-    status = g_application_run (G_APPLICATION (app), argc, argv);
-    g_object_unref (app);
-    */
 
     // CONNEXION BDD
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
@@ -86,6 +78,7 @@ int main(int argc, char **argv){
 
 	                            /** ETAPE 1 **/
 	                            /** CREATION DE LA FENETRE **/
+	                            //createWinGTK(window);
 	                            window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	                            gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
 	                            gtk_window_set_default_size(GTK_WINDOW(window), 1280, 720); /** DIMENSION DE LA FENETRE **/
@@ -109,14 +102,14 @@ int main(int argc, char **argv){
 	                            array = gtk_table_new(3, 5, TRUE); /** TABLE DE 3 LIGNES 5 COLONNES A VOUS DE CHOISIR **/
 	                            gtk_box_pack_start(GTK_BOX(vbox2), array, FALSE, FALSE, 10);
 
-	                            button = gtk_button_new_with_label("Button 1");
+	                            button = gtk_button_new_with_label("Sushi Saumon (Salmon,Rice -1)");
 	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
-	                            button = gtk_button_new_with_label("Button 2");
+	                            button = gtk_button_new_with_label("Brochette Poulet");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
+                                /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
-	                                                                    /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
-	                            sTabLabel = g_strdup_printf("Onglet 1"); /** NOM DE VOTRE ONGLET **/
+	                            sTabLabel = g_strdup_printf("Menu"); /** NOM DE VOTRE ONGLET **/
 	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
 
 	                            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox2, pTabLabel); /** INSERTION DE LA PAGE **/
@@ -124,11 +117,24 @@ int main(int argc, char **argv){
 	                            vbox3 = gtk_vbox_new(FALSE, 0);
 	                            gtk_container_add(GTK_CONTAINER(window), vbox3);
 
-	                            sTabLabel = g_strdup_printf("Onglet 2"); /** NOM DE VOTRE ONGLET2 **/
+	                            sTabLabel = g_strdup_printf("Dessert"); /** NOM DE VOTRE ONGLET2 **/
 	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
 
 	                            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox3, pTabLabel); /** INSERTION DE LA PAGE **/
 
+	                            vbox4 = gtk_vbox_new(FALSE, 0);
+	                            gtk_container_add(GTK_CONTAINER(window), vbox4);
+
+                                sTabLabel = g_strdup_printf("Ingredient"); /** NOM DE VOTRE ONGLET3 **/
+	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
+                                gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox4, pTabLabel); /** INSERTION DE LA PAGE **/
+
+                                vbox5 = gtk_vbox_new(FALSE, 0);
+	                            gtk_container_add(GTK_CONTAINER(window), vbox5);
+
+                                sTabLabel = g_strdup_printf("Table et Finaliser"); /** NOM DE VOTRE ONGLET3 **/
+	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
+                                gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox5, pTabLabel); /** INSERTION DE LA PAGE **/
 
 	                            /** AFFICHAGE DE TOUS LES ELEMENTS DANS LA FENETRE **/
 	                            gtk_widget_show_all(window);
