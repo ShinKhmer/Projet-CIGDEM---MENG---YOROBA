@@ -1,6 +1,9 @@
 // GTK Function
+// PROTOTYPES
+static void activate (GtkApplication* app,gpointer user_data);
 
 
+/*
 //Bouton Commencez
 static void activate (GtkApplication* app,gpointer user_data)
 {
@@ -25,3 +28,4 @@ static void activate (GtkApplication* app,gpointer user_data)
 
 return status;
 }
+*/
