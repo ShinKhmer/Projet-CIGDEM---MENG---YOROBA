@@ -103,8 +103,10 @@ int main(int argc, char **argv){
 	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            image = gtk_image_new_from_file("image/sushi.jpg");
                                 gtk_container_add (GTK_CONTAINER (button), image);
-                                gtk_button_set_image_position (button,0);
+                                gtk_button_set_image_position (button,GTK_POS_BOTTOM);
 	                            gtk_button_set_image (button,image);
+                                g_signal_connect(button, "clicked", G_CALLBACK (print_hello), NULL);
+
 
 	                            button = gtk_button_new_with_label("Brochette Poulet");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
