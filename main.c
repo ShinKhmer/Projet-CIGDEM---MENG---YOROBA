@@ -18,6 +18,7 @@
     GtkWidget *array;
     GtkWidget *button;
     GtkWidget *pTabLabel;
+    GtkWidget *image;
     gchar *sTabLabel;
 
 int main(int argc, char **argv){
@@ -27,7 +28,6 @@ int main(int argc, char **argv){
     int choice = 0;
     int choice_product = 0;
     int line = 0;
-
     // INITIALISATION BDD
     MYSQL *database = NULL;
     database = mysql_init(database);
@@ -78,11 +78,8 @@ int main(int argc, char **argv){
 
 	                            /** ETAPE 1 **/
 	                            /** CREATION DE LA FENETRE **/
-	                            //createWinGTK(window);
 	                            window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	                            gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
-	                            gtk_window_set_default_size(GTK_WINDOW(window), 1280, 720); /** DIMENSION DE LA FENETRE **/
-	                            gtk_window_set_title(GTK_WINDOW(window), "CIGMENYO"); /** TITRE DE LA FENETRE **/
+	                            createWinGTK(window);
 
 	                            /** ETAPE 2 **/
 	                            vbox = gtk_vbox_new(FALSE, 0); /** CREATION DU BOX ORIENTEE VERTICALEMENT (OU HORIZONTALEMENT SELON VOTRE CHOIX) **/
@@ -102,8 +99,12 @@ int main(int argc, char **argv){
 	                            array = gtk_table_new(3, 5, TRUE); /** TABLE DE 3 LIGNES 5 COLONNES A VOUS DE CHOISIR **/
 	                            gtk_box_pack_start(GTK_BOX(vbox2), array, FALSE, FALSE, 10);
 
-	                            button = gtk_button_new_with_label("Sushi Saumon (Salmon,Rice -1)");
+	                            button = gtk_button_new_with_label("Sushi Saumon");
 	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
+	                            image = gtk_image_new_from_file("image/sushi.jpg");
+                                gtk_container_add (GTK_CONTAINER (button), image);
+	                            gtk_button_set_image (button,image);
+
 	                            button = gtk_button_new_with_label("Brochette Poulet");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
