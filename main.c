@@ -12,7 +12,6 @@ int main(int argc, char **argv){
     int choice = 0;
     int choice_product = 0;
     int line = 0;
-    char name[50];
 
     // INITIALISATION BDD
     MYSQL *database = NULL;
@@ -36,20 +35,22 @@ int main(int argc, char **argv){
         //Menu
         // 0. View ingredients
         // 1. Add or modify ingredients
-        // 2. Add menu
+        // 2. View products
+        // 3. Add products
+        // 4. Add existing ingredients to products
         // 8. Power on terminals
         // 9. Power off terminals
         while(choice != 9){
             choice = terminal_print_menu();      // view menu instructions
 
             switch(choice){
-                case 0:     request(database, result, row);
+                case 0:     view_ingredient(database, result, row);
                             break;
                 case 1:     insert_ingredients(database, result, row);
                             break;
                 case 2:     view_product(database, result, row);
                             break;
-                case 3:     create_products(database, result, row);
+                case 3:     create_product(database, result, row);
                             break;
                 case 4:     line = view_product(database, result, row);
                             choice_product = choose_product(database, result, row, line);
@@ -63,13 +64,10 @@ int main(int argc, char **argv){
             }
             mysql_free_result(result);
         }
-
-
         mysql_close(database);
     }else{
         printf("Problem while connecting to database !\n");
     }
 
-    //ez_menu();
     return 0;
 }

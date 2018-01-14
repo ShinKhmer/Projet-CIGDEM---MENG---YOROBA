@@ -1,13 +1,18 @@
 // PROTOTYPES
+int terminal_print_menu();
+
+void view_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW);
 int search_db_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
-int recuperation_id_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
 void add_db_ingredient(MYSQL *, char *, char *);
 void update_db_ingredient(MYSQL *, char *, char *);
+int recuperation_id_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
 
+int view_product(MYSQL *, MYSQL_RES *, MYSQL_ROW);
+void create_product(MYSQL *, MYSQL_RES *, MYSQL_ROW );
 int choose_product(MYSQL *, MYSQL_RES *, MYSQL_ROW , int );
 void add_db_product(MYSQL *db, char *, char *);
-void link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, int);
 
+void link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, int);
 void add_db_link_product_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, int, int);
 
 void fgets_correct(char *);
@@ -36,10 +41,9 @@ int terminal_print_menu(){
 
 
 
+/* INGREDIENTS FUNCTIONS */
 
-/* BDD functions */
-
-void request(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
+void view_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     unsigned int i = 1;
     unsigned int number_champs = 0;
     unsigned long *lengths;
@@ -70,7 +74,6 @@ void request(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     }
 }
 
-
 void insert_ingredients(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     char name[50];
     char number[10];
@@ -96,7 +99,6 @@ void insert_ingredients(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
         update_db_ingredient(db, name, number);
     }
 }
-
 
 int search_db_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name){
     unsigned int i = 1;
@@ -131,7 +133,6 @@ int search_db_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name){
     return cnt;
 }
 
-
 void add_db_ingredient(MYSQL *db, char *name, char *number){
     char add[200] = "INSERT INTO INGREDIENT VALUES(NULL, '";
 
@@ -155,29 +156,40 @@ void update_db_ingredient(MYSQL *db, char *name, char *number){
     printf("\nModify ingredient: %lu\n", (unsigned long)mysql_affected_rows(db));
 }
 
+int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name_ingredient){
+    int id_ingredient = 0;
+    char request[100] = "SELECT id_ingredient FROM INGREDIENT WHERE name='";
 
-void create_products(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
-    char name[50];
-    char price[10];
+    strcat(request, name_ingredient);
+    strcat(request, "'");
 
-    fflush(stdin);
-    printf("Insert name of the new product :\n");
-    fgets(name, 50, stdin);
-    fgets_correct(name);
+    // Request
+    mysql_query(db, request);
 
-    printf("\nInsert the price of the new product :\n");
-    fgets(price, 10, stdin);
-    fgets_correct(price);
-    printf("\nname: %s - price : %s\n", name, price);
+    // Result recuperation
+    res = mysql_use_result(db);
 
-    add_db_product(db, name, price);
+    if(res == NULL){
+        printf("There is no result\n");
+    }
+    else{
+        // While there is any result
+        while( (row = mysql_fetch_row(res)) ){
+            id_ingredient = atoi(row[0]);
+        }
+    }
+
+    return id_ingredient;
 }
 
+
+
+
+/* PRODUCTS FUNCTIONS */
 
 int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     int i = 1;
     int line = 1;
-    int choice_product = 0;
     unsigned int number_champs = 0;
     unsigned long *lengths;
 
@@ -213,6 +225,23 @@ int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     return (line - 1);
 }
 
+void create_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
+    char name[50];
+    char price[10];
+
+    fflush(stdin);
+    printf("Insert name of the new product :\n");
+    fgets(name, 50, stdin);
+    fgets_correct(name);
+
+    printf("\nInsert the price of the new product :\n");
+    fgets(price, 10, stdin);
+    fgets_correct(price);
+    printf("\nname: %s - price : %s\n", name, price);
+
+    add_db_product(db, name, price);
+}
+
 int choose_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int line){
     int choice_product = 0;
 
@@ -240,7 +269,6 @@ void add_db_product(MYSQL *db, char *name, char *price){
 
 
 void link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_product){
-
     // name_product <-> table product
     char ingredient[50];
     int number = 0;
@@ -266,51 +294,13 @@ void link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_pr
                 add_db_link_product_ingredient(db, res, row, id_product, id_ingredient);
             }
             else if(strcmp(ingredient, "help") == 0){
-                request(db, res, row);
+                view_ingredient(db, res, row);
             }
             else{
                 printf("\nPlease type an existing ingredient !\n");
             }
         }
     }
-}
-
-
-int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *name_ingredient){
-    unsigned int i = 0;
-    unsigned int number_champs = 0;
-    unsigned long *lengths;
-    int id_ingredient = 0;
-    char request[50] = "SELECT id_ingredient FROM INGREDIENT WHERE name='";
-    char string_res[5];
-
-    strcat(request, name_ingredient);
-    strcat(request, "'");
-
-    // Request
-    mysql_query(db, request);
-
-    // Result recuperation
-    res = mysql_use_result(db);
-
-    // Number of elements in one result line
-    number_champs = mysql_num_fields(res);
-
-    if(res == NULL){
-        printf("There is no result\n");
-    }
-    else{
-        // While there is any result
-        while( (row = mysql_fetch_row(res)) ){
-            lengths = mysql_fetch_lengths(res);
-            strcpy(string_res, row[i]);
-            printf("\n");
-            i++;
-        }
-    }
-    id_ingredient = atoi(string_res);
-
-    return id_ingredient;
 }
 
 void add_db_link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_product, int id_ingredient){
