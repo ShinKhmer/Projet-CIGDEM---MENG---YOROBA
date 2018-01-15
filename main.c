@@ -102,7 +102,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add(GTK_CONTAINER(window), vbox2);
 	                            /** VOTRE CONTENU ICI **/
 	                            array = gtk_table_new(3, 5, TRUE); /** TABLE DE 3 LIGNES 5 COLONNES A VOUS DE CHOISIR **/
-	                            gtk_box_pack_start(GTK_BOX(vbox2), array, FALSE, FALSE, 10);
+	                            gtk_box_pack_start(GTK_BOX(vbox3), array, FALSE, FALSE, 10);
 
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
@@ -203,7 +203,7 @@ int main(int argc, char **argv){
 
                                 button = gtk_button_new_with_label("Annuler");
                                 gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
-                                g_signal_connect(button,"clicked", G_CALLBACK (button_quit),NULL);
+                                g_signal_connect(button,"clicked", G_CALLBACK (button_reset),NULL);
 
 
                                 button = gtk_button_new_with_label("Commander");
@@ -223,6 +223,13 @@ int main(int argc, char **argv){
 	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
 
 	                            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox3, pTabLabel); /** INSERTION DE LA PAGE **/
+
+                                button = gtk_button_new_with_label("Mochi");
+	                            image = gtk_image_new_from_file("image/mochi.jpg");
+	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
+	                            gtk_container_add (GTK_CONTAINER (button), image);
+                                gtk_button_set_image_position (button,GTK_POS_BOTTOM);
+                                gtk_button_set_image (button,image);
 
 	                            vbox4 = gtk_vbox_new(FALSE, 0);
 	                            gtk_container_add(GTK_CONTAINER(window), vbox4);

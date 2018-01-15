@@ -2,7 +2,7 @@
 void createWinGTK(GtkWidget *window);
 void button_action (GtkWidget *widget,gpointer data,MYSQL *db,int tabplat[][2],int id_button);
 void apply_button(GtkWidget *button,GtkWidget *image,GtkWidget *array;);
-void button_quit (GtkWidget *widget,gpointer data,int **tabplat);
+void button_reset (GtkWidget *widget,gpointer data,int **tabplat);
 void button_order (GtkWidget *widget,gpointer data);
 //Creation fenetre , soucis ici au pasage en fonction
 void createWinGTK(GtkWidget *window){
@@ -15,16 +15,18 @@ void button_action (GtkWidget *widget,gpointer data,MYSQL *db,int tabplat[][2],i
 {
   g_print ("\nAction Bouton\n");
   tabplat[id_button][1]+=1;
-  printf("valeur de tab[1][%d] TEST \n",tabplat[id_button][1]);
+  g_print ("valeur de tab[%d][%d] TEST \n",id_button,tabplat[id_button][1]);
 
   //char update[200] = "UPDATE INGREDIENT SET quantity = quantity - 1 WHERE name = 'pork'";
   //g_print ("%c",update);
   //mysql_query(db,update);
 }
-void button_quit (GtkWidget *widget,gpointer data,int **tabplat)
+void button_reset (GtkWidget *widget,gpointer data,int **tabplat)
 {
-  tabplat[13][2]={{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},
-                  {7,0},{8,0},{9,0},{10,0},{11,0},{12,0},{13,0}};
+    int i = 0;
+    for (i=0;i<13;i++){
+       tabplat[i][1] = 0;
+    }
 }
 
 void button_order (GtkWidget *widget,gpointer data)
