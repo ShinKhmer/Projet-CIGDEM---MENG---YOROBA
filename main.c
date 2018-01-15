@@ -21,6 +21,19 @@
     GtkWidget *image;
     gchar *sTabLabel;
 
+    // pour sur place ou emporter
+
+    GtkWidget * p_win       = NULL;
+    GtkWidget * p_vbox      = NULL;
+    GtkWidget * p_button[2];
+    GtkWidget * p_combo     = NULL;
+
+    GtkListStore      *  p_model  = NULL;
+    GtkCellRenderer   *  p_cell   = NULL;
+    GtkTreeIter iter;
+    gint i = 0;
+    // Structure de la COMBO BOX qui contient a emporter ou sur place
+
 int main(int argc, char **argv){
 
     // Variable
@@ -201,6 +214,59 @@ int main(int argc, char **argv){
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
 
+                                p_combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (p_model));
+                                gtk_box_pack_start (GTK_BOX (p_vbox), p_combo, TRUE, TRUE, 0);
+
+                                p_cell = gtk_cell_renderer_text_new ();
+                                gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (p_combo), p_cell, FALSE);
+                                gtk_cell_layout_set_attributes (
+                                   GTK_CELL_LAYOUT (p_combo),
+                                   p_cell, "Sur Place", 0,
+                                   NULL
+                                );
+
+                                p_cell = gtk_cell_renderer_text_new ();
+                                gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (p_combo), p_cell, FALSE);
+                                gtk_cell_layout_set_attributes (
+                                   GTK_CELL_LAYOUT (p_combo),
+                                   p_cell, "A Emporter", 1,
+                                   NULL
+                                );
+
+       /*
+       * Remplissage du magasin.
+       */
+      for (i = 0; i < 10; i++)
+      {
+         /* Ajpout d'un nouvel element dans le magasin. */
+         gtk_list_store_append (p_model, & iter);
+
+         /* On rempli le nouvel element. */
+         gtk_list_store_set (
+            p_model, & iter,
+            0, i + 1, 1, " - Element...",
+            -1
+         );
+      }
+
+
+      /*
+       * On affiche un element par defaut. L'index commence à zero.
+       */
+      gtk_combo_box_set_active (GTK_COMBO_BOX (p_combo), 2);
+      g_signal_connect (G_OBJECT (p_button[0]), "clicked", G_CALLBACK (cb_show), p_combo);
+
+/*
+                                gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+                                gtk_label_new ("Les Desserts");
+
+                                button = gtk_button_new_with_label("Mochi");
+	                            image = gtk_image_new_from_file("image/mochi.jpg");
+	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
+	                            gtk_container_add (GTK_CONTAINER (button), image);
+                                gtk_button_set_image_position (button,GTK_POS_BOTTOM);
+                                gtk_button_set_image (button,image);
+*/
                                 button = gtk_button_new_with_label("Annuler");
                                 gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
                                 g_signal_connect(button,"clicked", G_CALLBACK (button_reset),NULL);
@@ -223,13 +289,6 @@ int main(int argc, char **argv){
 	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
 
 	                            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox3, pTabLabel); /** INSERTION DE LA PAGE **/
-
-                                button = gtk_button_new_with_label("Mochi");
-	                            image = gtk_image_new_from_file("image/mochi.jpg");
-	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
-	                            gtk_container_add (GTK_CONTAINER (button), image);
-                                gtk_button_set_image_position (button,GTK_POS_BOTTOM);
-                                gtk_button_set_image (button,image);
 
 	                            vbox4 = gtk_vbox_new(FALSE, 0);
 	                            gtk_container_add(GTK_CONTAINER(window), vbox4);

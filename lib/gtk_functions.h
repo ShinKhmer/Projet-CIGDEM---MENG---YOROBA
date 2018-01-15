@@ -1,9 +1,20 @@
+//Structure de la COMBOBOX
+typedef struct
+{
+   gint     index;
+   gchar *  p_text;
+}
+combo_data_st;
 // PROTOTYPES
 void createWinGTK(GtkWidget *window);
 void button_action (GtkWidget *widget,MYSQL *db,int tabplat[][2],int id_button);
 void apply_button(GtkWidget *button,GtkWidget *image,GtkWidget *array;);
 void button_reset (GtkWidget *widget,gpointer data,int **tabplat);
 void button_order (GtkWidget *widget,gpointer data,MYSQL *db, MYSQL_RES *res, MYSQL_ROW row);
+static combo_data_st get_active_data (GtkComboBox * p_combo);
+static void cb_show (GtkWidget * p_wid, gpointer p_data);
+
+
 //Creation fenetre , soucis ici au pasage en fonction
 void createWinGTK(GtkWidget *window){
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
@@ -85,3 +96,48 @@ gtk_button_set_image_position (button,GTK_POS_BOTTOM);
 gtk_button_set_image (button,image);
 }
 */
+
+/* Fonction qui recupere les donnees de l'element courant affiche. sur la combo BOX Sur place ou a emporter*/
+static combo_data_st get_active_data (GtkComboBox * p_combo)
+{
+   GtkTreeModel   *  p_model = NULL;
+   GtkTreeIter       iter;
+   combo_data_st     p_st;
+
+
+   /* On recupere le modele qu'on a cree. */
+   p_model = gtk_combo_box_get_model (p_combo);
+
+   /* On recupere le GtkTreeIter de l'element courant. */
+   if (gtk_combo_box_get_active_iter (p_combo, & iter))
+   {
+      /*
+       * On recupere les donnees de l'element courant a savoir
+       * un entier et une chaine de caracteres.
+       */
+      gtk_tree_model_get (
+         p_model,
+         & iter,
+         0, & p_st.index,
+         1, & p_st.p_text,
+         -1
+      );
+   }
+    return p_st;
+}
+
+/*
+ * Callback des GtkButton.
+ */
+static void cb_show (GtkWidget * p_wid, gpointer p_data)
+{
+   GtkComboBox    *  p_combo  = p_data;
+   combo_data_st     p_st;
+
+
+   p_st = get_active_data (p_combo);
+   g_printf ("Element courant : %d%s\n", p_st.index, p_st.p_text);
+
+
+   (void) p_wid;
+}
