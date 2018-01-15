@@ -4,8 +4,9 @@
 #include <winsock.h>
 #include <MYSQL/mysql.h>
 #include <gtk/gtk.h>
-#include "lib\functions.h"
 #include "lib\functions_gtk.h"
+#include "lib\functions.h"
+
 
 // INIT GTK
     GtkWidget *window;
@@ -22,6 +23,9 @@
     gchar *sTabLabel;
 
 int main(int argc, char **argv){
+
+    // initialisation db
+    db_params db;
 
     // Variable
     int status;
@@ -50,8 +54,11 @@ int main(int argc, char **argv){
         // Déclaration des objets
         MYSQL_RES *result = NULL;
         MYSQL_ROW row = NULL;
-        //request(database, result, row);
 
+        db.mysql = database;
+        db.result = result;
+        db.row = row;
+        db.test = 1;
 
        //Menu
         // 0. View ingredients
@@ -65,7 +72,7 @@ int main(int argc, char **argv){
             choice = terminal_print_menu();      // view menu instructions
 
 	            switch(choice){
-	                case 0:     view_ingredient(database, result, row);
+	                case 0:     //view_ingredient(database, result, row);
 	                            break;
 	                case 1:     insert_ingredients(database, result, row);
 	                            break;
@@ -106,26 +113,30 @@ int main(int argc, char **argv){
 
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
-                                db_params test_param;
-                                test_param.mysql = NULL;
-                                test_param.result = NULL;
-                                test_param.row = NULL;
-                                test_param.test = 5;
+                                // NANI ?
+                                /*for(i = 1; i <= 2; i++){
 
+                                }*/
+
+
+                                db.test = 1;
 	                            button = gtk_button_new_with_label("Ramen Pork");
                                 image = gtk_image_new_from_file("image/Ramen Pork.jpg");
                                 gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
                                 gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&test_param);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db);
 
+                                db_params db2 = db;
+                                db2.test = 2;
 	                            button = gtk_button_new_with_label("Ramen Fish");
 	                            image = gtk_image_new_from_file("image/Ramen Fish.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db2);
 
                                 button = gtk_button_new_with_label("Ramen Beef");
 	                            image = gtk_image_new_from_file("image/Ramen Beef.jpg");

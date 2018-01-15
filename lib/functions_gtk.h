@@ -29,6 +29,45 @@ void test(GtkWidget *widget, gpointer data){
 
 }
 
+/*int view_product(GtkWidget *widget, gpointer data){
+    db_params *db_params_send = data;
+    int i = 1;
+    int line = 1;
+    unsigned int number_champs = 0;
+    unsigned long *lengths;
+
+    // Request
+    mysql_query(db, "SELECT * FROM PRODUCT");
+
+
+    // Result recuperation
+    res = mysql_use_result(db);
+
+    // Number of elements in one result line
+    number_champs = mysql_num_fields(res);
+
+    if(res == NULL){
+        printf("There is no result\n");
+    }
+    else{
+        // While there is any result
+        while( (row = mysql_fetch_row(res)) ){
+
+            lengths = mysql_fetch_lengths(res);
+
+            printf("%2d - ", line);
+
+            for(i = 1; i <= number_champs; i++){
+                printf("%.*s ", (int)lengths[i], row[i] ? row[i] : "NULL");
+            }
+            printf("euros\n");
+
+            line++;
+        }
+    }
+
+    return (line - 1);
+}*/
 
 
 
