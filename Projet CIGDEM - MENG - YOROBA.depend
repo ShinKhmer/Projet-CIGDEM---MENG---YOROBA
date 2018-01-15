@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1515964593 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.c
+1516052400 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.c
 	"lib/ez-draw.h"
 
 1396019866 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw.h
@@ -47,7 +47,7 @@
 1513718547 source:c:\users\jonathan\desktop\esgi_2017-2018\langace c\projet c\projet-cigdem---meng---yoroba\ez-draw.c
 	"ez-draw.h"
 
-1515951422 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
+1516053843 source:d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -55,12 +55,13 @@
 	<MYSQL/mysql.h>
 	<gtk/gtk.h>
 	"lib\functions.h"
+	"lib\functions_gtk.h"
 
 1513730505 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\ez-draw_functions.h
 
 1514587679 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\functions.h
 
-1515964593 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\ez-draw.h
+1516052400 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\ez-draw.h
 	<stdio.h>
 	<stdio.h>
 	<stdlib.h>
@@ -79,5 +80,7 @@
 
 1514740192 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\ez-draw_functions.h
 
-1515951422 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions.h
+1516042881 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions.h
+
+1516053756 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions_gtk.h
 
