@@ -1,69 +1,127 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ez-draw.h"
-#include "ez-draw_functions.h"
-#include "functions.h"
+#include <string.h>
 #include <winsock.h>
 #include <MYSQL/mysql.h>
+#include <gtk/gtk.h>
+#include "lib\functions.h"
+// PROTOTYPES
 
-// Connection à la BDD
+int main(int argc, char **argv){
 
+    int choice = 0;
+    int choice_product = 0;
+    char name[50];
+    int id_terminal = 0 ;
 
-void menu(char *);
+    // INITIALISATION BDD
+    MYSQL *database = NULL;
+    database = mysql_init(database);
 
-int main(int argc, char **argv)
-{
-
-// Connexion à la BDD
-
-    MYSQL mysql;
-    mysql_init(&mysql);
-    mysql_options(&mysql,MYSQL_READ_DEFAULT_GROUP,"option");
-
-    if(mysql_real_connect(&mysql,"localhost","root","","base_restaurant",0,NULL,0))
-    {
-        mysql_close(&mysql);
-    }
-    else
-    {
-        printf("Une erreur s'est produite lors de la connexion a la BDD!");
+    if(database == NULL){
+        printf("\nProblem while initializing database !\n");
+        return  0;
     }
 
+    mysql_options(database, MYSQL_READ_DEFAULT_GROUP, "option");
 
 
-    char choice;
+    // CONNEXION BDD
+    if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
 
-	menu(&choice);
+        // Déclaration des objets
+        MYSQL_RES *result = NULL;
+        MYSQL_ROW row = NULL;
 
-	switch(choice){
-		case '1' :
-		printf("Choisir son menu \n");
-		break;
-		case '2' :
-		printf("Ajouter ingredient \n");
+        //Menu
+        // 0. View ingredients
+        // 1. Add or modify ingredients
+        // 2. Add menu
+        // 8. Power on terminals
+        // 9. Power off terminals
+        while(choice != 9){
+            choice = terminal_print_menu();      // view menu instructions
 
-		break;
-		case '3' :
-		printf("Promotion \n");
+            switch(choice){
+                case 0:     request(database, result, row);
+                            break;
+                case 1:     insert_ingredients(database, result, row);
+                            break;
+                case 2:     create_products(database, result, row);
+                            break;
+                case 3:     choice_product = view_product(database, result, row);
+                            printf("\nchoice_product: %d", choice_product);
+                            //link_product_ingredient(database, result, row, name);
+                            break;
+                case 8:     // Power on, open terminals with gtk
+                            break;
+                case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
+                            break;
+                default:    break;
+            }
+            mysql_free_result(result);
+        }
 
-		break;
-		case '4' :
-		printf("Choisir Table et place \n");
-		ez_menu();
+
+        mysql_close(database);
+    }else{
+        printf("Problem while connecting to database !\n");
+    }
+// CREATION DE LA FACTURE
+
+// Récuparation de l'id terminal
+
+    sprintf(request,"SELECT id_terminal FROM terminal WHERE id_terminal='%d'",id_terminal);
+        mysql_query(mysql,request);
+        // Result recuperation
+        res = mysql_use_result(mysql);
+        row = mysql_fetch_row(result);
+        mysql_free_result(result);
 
 
-		break;
-		case '5' :
-		printf("Finaliser la commande \n");
 
-		break;
-		case '0' :
-		printf("Quitter \n");
+// Récupération numéro de commande
 
-		break;
-		default :
-		printf("Choix par défaut \n");
+    sprintf(request,"SELECT id_order FROM order WHERE id_terminal='%d'",id_terminal);
+        mysql_query(mysql,request);
+        // Result recuperation
+        res = mysql_use_result(mysql);
+        row = mysql_fetch_row(result);
+        mysql_free_result(result);
+
+// Récupération total de la commande
+
+     sprintf(request,"SELECT id_order FROM order WHERE total_price='%d'",total_price);
+            mysql_query(mysql,request);
+            // Result recuperation
+            res = mysql_use_result(mysql);
+            row = mysql_fetch_row(result);
+            mysql_free_result(result);
+
+
+
+
+
+
+    FILE *fact = fopen("facture.txt","a+");
+    int word = 0;
+
+    if(fact == NULL) {
+        EXIT_SUCCESS
+
+    }
+    while ((word = fgetc(fact)) != EOF ) {
+
+            printf ("%c",word)
+
     }
 
+
+
+
+    fclose(fact)
+
+
+    //ez_menu();
     return 0;
 }
