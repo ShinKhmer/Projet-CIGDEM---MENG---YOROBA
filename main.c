@@ -102,7 +102,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add(GTK_CONTAINER(window), vbox2);
 	                            /** VOTRE CONTENU ICI **/
 	                            array = gtk_table_new(3, 5, TRUE); /** TABLE DE 3 LIGNES 5 COLONNES A VOUS DE CHOISIR **/
-	                            gtk_box_pack_start(GTK_BOX(vbox3), array, FALSE, FALSE, 10);
+	                            gtk_box_pack_start(GTK_BOX(vbox2), array, FALSE, FALSE, 10);
 
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
