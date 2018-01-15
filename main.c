@@ -28,6 +28,7 @@ int main(int argc, char **argv){
     int choice = 0;
     int choice_product = 0;
     int line = 0;
+    int id_button;
     // tableau a double dimension
     //Stockera l'id du plat et le nombre de commande du plat
     int tabplat[13][2]={{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},
@@ -112,8 +113,8 @@ int main(int argc, char **argv){
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
                                 //apply_button(button,image,array);
-                                g_signal_connect(button, "clicked", G_CALLBACK (button_action), NULL);
-
+                                id_button = 0;
+                                g_signal_connect(button,"clicked", G_CALLBACK (button_action),NULL);
 
 	                            button = gtk_button_new_with_label("Ramen Fish");
 	                            image = gtk_image_new_from_file("image/ramen_fish.jpg");
@@ -199,6 +200,16 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+
+                                button = gtk_button_new_with_label("Annuler");
+                                gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
+                                g_signal_connect(button,"clicked", G_CALLBACK (button_quit),NULL);
+
+
+                                button = gtk_button_new_with_label("Commander");
+                                gtk_table_attach(GTK_TABLE(array), button, 4, 5, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
+                                g_signal_connect(button,"clicked", G_CALLBACK (button_order),NULL);
+
 
 	                            sTabLabel = g_strdup_printf("Menu"); /** NOM DE VOTRE ONGLET **/
 	                            pTabLabel = gtk_label_new(sTabLabel); /** CREATION D'UN LABEL PERMETTANT DE L'INSERER AU NOTEBOOK **/
