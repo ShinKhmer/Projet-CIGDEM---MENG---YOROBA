@@ -1,9 +1,9 @@
 // PROTOTYPES
 void createWinGTK(GtkWidget *window);
-void button_action (GtkWidget *widget,gpointer data,MYSQL *db,int tabplat[][2],int id_button);
+void button_action (GtkWidget *widget,MYSQL *db,int tabplat[][2],int id_button);
 void apply_button(GtkWidget *button,GtkWidget *image,GtkWidget *array;);
 void button_reset (GtkWidget *widget,gpointer data,int **tabplat);
-void button_order (GtkWidget *widget,gpointer data);
+void button_order (GtkWidget *widget,gpointer data,MYSQL *db, MYSQL_RES *res, MYSQL_ROW row);
 //Creation fenetre , soucis ici au pasage en fonction
 void createWinGTK(GtkWidget *window){
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
@@ -11,11 +11,11 @@ void createWinGTK(GtkWidget *window){
     gtk_window_set_title(GTK_WINDOW(window), "CIGMENYO"); /** TITRE DE LA FENETRE **/
 }
 
-void button_action (GtkWidget *widget,gpointer data,MYSQL *db,int tabplat[][2],int id_button)
+void button_action (GtkWidget *widget,MYSQL *db,int tabplat[][2],int id_button)
 {
   g_print ("\nAction Bouton\n");
-  tabplat[id_button][1]+=1;
-  g_print ("valeur de tab[%d][%d] TEST \n",id_button,tabplat[id_button][1]);
+  tabplat[id_button][1]++;
+  g_print ("valeur de tab[%d][1] TEST  vaut %d commandes \n",id_button,tabplat[id_button][1]);
 
   //char update[200] = "UPDATE INGREDIENT SET quantity = quantity - 1 WHERE name = 'pork'";
   //g_print ("%c",update);
@@ -29,10 +29,53 @@ void button_reset (GtkWidget *widget,gpointer data,int **tabplat)
     }
 }
 
-void button_order (GtkWidget *widget,gpointer data)
+void button_order (GtkWidget *widget,gpointer data,MYSQL *db, MYSQL_RES *res, MYSQL_ROW row)
 {
+// CREATION DE LA FACTURE
 
+// Récuperation de l'id terminal
+/*
+    sprintf(request,"SELECT id_terminal FROM terminal WHERE id_terminal='%d'",id_terminal);
+    mysql_query(mysql,request);
+    // Result recuperation
+    res = mysql_use_result(mysql);
+    row = mysql_fetch_row(result);
+    mysql_free_result(result);
+
+    // Récupération numéro de commande
+
+    sprintf(request,"SELECT id_order FROM order WHERE id_terminal='%d'",id_terminal);
+        mysql_query(mysql,request);
+        // Result recuperation
+        res = mysql_use_result(mysql);
+        row = mysql_fetch_row(result);
+        mysql_free_result(result);
+
+// Récupération total de la commande
+
+     sprintf(request,"SELECT id_order FROM order WHERE total_price='%d'",total_price);
+            mysql_query(mysql,request);
+            // Result recuperation
+            res = mysql_use_result(mysql);
+            row = mysql_fetch_row(result);
+            mysql_free_result(result);
+
+    FILE *fact = fopen("facture.txt","a+t");
+    int word = 0;
+
+    if(fact == NULL) {
+        EXIT_SUCCESS
+
+    }
+    while ((word = fgetc(fact)) != EOF ) {
+
+            printf ("%c",word)
+
+    }
+    fclose(fact)
+    */
 }
+
 /*
 void apply_button(GtkWidget *button,GtkWidget *image,GtkWidget *array;)
 {
