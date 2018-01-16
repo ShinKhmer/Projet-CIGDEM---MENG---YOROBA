@@ -1,7 +1,7 @@
 // PROTOTYPES
 int terminal_print_menu();
 
-void view_ingredient(GtkWidget *, gpointer);
+void view_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW);
 int search_db_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
 void add_db_ingredient(MYSQL *, char *, char *);
 void update_db_ingredient(MYSQL *, char *, char *);
@@ -43,12 +43,7 @@ int terminal_print_menu(){
 
 /* INGREDIENTS FUNCTIONS */
 //void view_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row)
-void view_ingredient(GtkWidget *widget, gpointer data){
-
-    db_params *test = data;
-    MYSQL *db = test->mysql;
-    MYSQL_RES *res = test->result;
-    MYSQL_ROW row = test->row;
+void view_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
 
     unsigned int i = 1;
     unsigned int number_champs = 0;
@@ -193,7 +188,7 @@ int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *n
 
 /* PRODUCTS FUNCTIONS */
 
-/*int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
+int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     int i = 1;
     int line = 1;
     unsigned int number_champs = 0;
@@ -229,7 +224,7 @@ int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *n
     }
 
     return (line - 1);
-}*/
+}
 
 void create_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     char name[50];
@@ -300,7 +295,7 @@ void link_product_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, int id_pr
                 add_db_link_product_ingredient(db, res, row, id_product, id_ingredient);
             }
             else if(strcmp(ingredient, "help") == 0){
-                //view_ingredient(db, res, row);
+                view_ingredient(db, res, row);
             }
             else{
                 printf("\nPlease type an existing ingredient !\n");
