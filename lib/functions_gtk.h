@@ -80,7 +80,9 @@ void total_price(GtkWidget *widget, gpointer data){
     double price = 0;
     total *total_retrieve = data;
     printf("%d %s", total_retrieve->db.counter, total_retrieve->db.name);
-    total_retrieve->db.counter++;
+
+    //Incrementation ok here
+    //total_retrieve->db.counter++;
 
     if( (total_retrieve->db.counter != 0) ){
         price += total_retrieve->db.counter * total_retrieve->db.price;

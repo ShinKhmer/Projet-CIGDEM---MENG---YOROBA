@@ -123,7 +123,7 @@ int main(int argc, char **argv){
 
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
-                                db_params db = { .mysql = database, .result = result, .row = row, .id = 1 };
+                                db_params db = { .mysql = database, .result = result, .row = row, .id = 1, .counter = 0 };
                                 search_info(&db);
                                 db_params db2 = { .mysql = database, .result = result, .row = row, .id = 2, .counter = 0 };
                                 search_info(&db2);
@@ -160,7 +160,7 @@ int main(int argc, char **argv){
                                 gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db);
                                 printf("oro");
 
 
@@ -170,7 +170,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db2);
 
 
                                 button = gtk_button_new_with_label(db3.name);
@@ -179,7 +179,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db3);
 
 
                                 button = gtk_button_new_with_label(db4.name);
@@ -188,7 +188,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db4);
 
 
                                 button = gtk_button_new_with_label(db5.name);
@@ -197,7 +197,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db5);
 
                                 button = gtk_button_new_with_label(db6.name);
 	                            image = gtk_image_new_from_file("image/Yakisoba.jpg");
@@ -205,7 +205,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db6);
 
 
                                 button = gtk_button_new_with_label(db7.name);
@@ -214,7 +214,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db7);
 
 
                                 button = gtk_button_new_with_label(db8.name);
@@ -223,7 +223,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db8);
 
 
                                 button = gtk_button_new_with_label(db9.name);
@@ -232,7 +232,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db9);
 
 
 
@@ -242,7 +242,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db10);
 
 
                                 button = gtk_button_new_with_label(db11.name);
@@ -251,7 +251,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db11);
 
 
                                 button = gtk_button_new_with_label(db12.name);
@@ -260,7 +260,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db12);
 
 
                                 button = gtk_button_new_with_label(db13.name);
@@ -269,7 +269,7 @@ int main(int argc, char **argv){
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
-                                g_signal_connect(button,"clicked", G_CALLBACK (test),&total_db);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db12);
 
                                 /*button = gtk_button_new_with_label("Annuler");
                                 gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
