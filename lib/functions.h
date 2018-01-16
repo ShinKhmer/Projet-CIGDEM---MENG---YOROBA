@@ -7,7 +7,7 @@ void add_db_ingredient(MYSQL *, char *, char *);
 void update_db_ingredient(MYSQL *, char *, char *);
 int recuperation_id_ingredient(MYSQL *, MYSQL_RES *, MYSQL_ROW, char *);
 
-int view_product(MYSQL *, MYSQL_RES *, MYSQL_ROW);
+//int view_product(MYSQL *, MYSQL_RES *, MYSQL_ROW);
 void create_product(MYSQL *, MYSQL_RES *, MYSQL_ROW );
 int choose_product(MYSQL *, MYSQL_RES *, MYSQL_ROW , int );
 void add_db_product(MYSQL *db, char *, char *);
@@ -193,7 +193,7 @@ int recuperation_id_ingredient(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row, char *n
 
 /* PRODUCTS FUNCTIONS */
 
-int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
+/*int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     int i = 1;
     int line = 1;
     unsigned int number_champs = 0;
@@ -229,7 +229,7 @@ int view_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     }
 
     return (line - 1);
-}
+}*/
 
 void create_product(MYSQL *db, MYSQL_RES *res, MYSQL_ROW row){
     char name[50];

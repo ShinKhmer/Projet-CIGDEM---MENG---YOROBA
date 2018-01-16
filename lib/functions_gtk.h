@@ -1,6 +1,9 @@
 // PROTOTYPES
 void createWinGTK(GtkWidget *window);
-void button_action (GtkWidget *widget,MYSQL *db,int tabplat[][2],int id_button);
+void view_product(GtkWidget *widget, gpointer data);
+
+
+// A VOIR
 void apply_button(GtkWidget *button,GtkWidget *image,GtkWidget *array;);
 void button_reset (GtkWidget *widget,gpointer data,int **tabplat);
 void button_order (GtkWidget *widget,gpointer data,MYSQL *db, MYSQL_RES *res, MYSQL_ROW row);
@@ -11,8 +14,20 @@ typedef struct db_params{
     MYSQL *mysql;
     MYSQL_RES *result;
     MYSQL_ROW row;
-    int test;
+    int id;
+    char name[30];
+    double price;
+    int counter;
+
 }db_params;
+
+typedef struct total{
+    db_params db;
+    db_params db2;
+    db_params db3;
+    db_params db4;
+    db_params db5;
+}total;
 
 
 //Creation fenetre , soucis ici au pasage en fonction
@@ -22,14 +37,79 @@ void createWinGTK(GtkWidget *window){
     gtk_window_set_title(GTK_WINDOW(window), "CIGMENYO"); /** TITRE DE LA FENETRE **/
 }
 
-void test(GtkWidget *widget, gpointer data){
+void test(GtkWidget *window, gpointer data){
     db_params *db_params_send = data;
 
-    printf("%d", db_params_send->test);
+    db_params_send->counter = 5;
+    printf("id = %d, name = %s, price = %.2lf, cnt = %d\n", db_params_send->id, db_params_send->name, db_params_send->price,db_params_send->counter);
 
+    data = db_params_send;
 }
 
-/*int view_product(GtkWidget *widget, gpointer data){
+
+void search_info(db_params *db){
+
+    int id_ingredient = 0;
+    char number[10];
+    char name[30];
+    char request[100] = "SELECT name, price FROM PRODUCT WHERE id_product=";
+
+
+    sprintf(number, "%d", db->id);
+    strcat(request, number);
+
+    // Request
+    mysql_query(db->mysql, request);
+
+    // Result recuperation
+    db->result = mysql_use_result(db->mysql);
+    if(db->result == NULL){
+        printf("There is no result\n");
+    }
+    else{
+        // While there is any result
+        while( (db->row = mysql_fetch_row(db->result)) ){
+            strcpy(db->name, (db->row)[0]);
+            db->price = atof((db->row)[1]);
+        }
+    }
+}
+
+void total_price(GtkWidget *widget, gpointer data){
+    double price = 0;
+    total *total_retrieve = data;
+    printf("%d", total_retrieve->db.counter);
+
+    if( (total_retrieve->db.counter != 0) ){
+        price += total_retrieve->db.counter * total_retrieve->db.price;
+    }
+    if(total_retrieve->db.counter != 0){
+        price += total_retrieve->db2.counter * total_retrieve->db2.price;
+    }
+    if(total_retrieve->db.counter != 0){
+        price += total_retrieve->db3.counter * total_retrieve->db3.price;
+    }
+    if(total_retrieve->db.counter != 0){
+        price += total_retrieve->db4.counter * total_retrieve->db4.price;
+    }
+    if(total_retrieve->db.counter != 0){
+        price += total_retrieve->db5.counter * total_retrieve->db5.price;
+    }
+
+    price = total_retrieve->db.price * total_retrieve->db.counter;
+
+
+    printf("TOTAL : %.2lf", price);
+}
+
+/*void init_db_params(int id_button, MYSQL *database, db_params *db){
+    db->mysql = database;
+    db->result = NULL;
+    db->row = NULL;
+    db->id = id_button;
+}*/
+
+/*void view_product(GtkWidget *widget, gpointer data){
     db_params *db_params_send = data;
     int i = 1;
     int line = 1;
@@ -61,26 +141,10 @@ void test(GtkWidget *widget, gpointer data){
                 printf("%.*s ", (int)lengths[i], row[i] ? row[i] : "NULL");
             }
             printf("euros\n");
-
-            line++;
         }
     }
 
-    return (line - 1);
 }*/
-
-
-
-void button_action (GtkWidget *widget,MYSQL *db,int tabplat[][2],int id_button)
-{
-  g_print ("\nAction Bouton\n");
-  tabplat[id_button][1]++;
-  g_print ("valeur de tab[%d][1] TEST  vaut %d commandes \n",id_button,tabplat[id_button][1]);
-
-  char update[200] = "UPDATE INGREDIENT SET quantity = quantity - 1 WHERE name = 'pork'";
-  g_print ("%c",update);
-  mysql_query(db,update);
-}
 
 
 void button_reset (GtkWidget *widget,gpointer data,int **tabplat)

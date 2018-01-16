@@ -24,15 +24,15 @@
 
 int main(int argc, char **argv){
 
-    // initialisation db
-    db_params db;
+
 
     // Variable
+    int i = 0;
     int status;
     int choice = 0;
     int choice_product = 0;
     int line = 0;
-    int id_button;
+    int tab[2] = {NULL};     // struct pt for button
     // tableau a double dimension
     //Stockera l'id du plat et le nombre de commande du plat
     int tabplat[13][2]={{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},
@@ -55,10 +55,11 @@ int main(int argc, char **argv){
         MYSQL_RES *result = NULL;
         MYSQL_ROW row = NULL;
 
-        db.mysql = database;
-        db.result = result;
-        db.row = row;
-        db.test = 1;
+        // Init db struc
+        db_params db = { .mysql = database, .result = result, .row = row, .id = 1, .counter = 0 };
+        search_info(&db);
+
+
 
        //Menu
         // 0. View ingredients
@@ -76,13 +77,13 @@ int main(int argc, char **argv){
 	                            break;
 	                case 1:     insert_ingredients(database, result, row);
 	                            break;
-	                case 2:     view_product(database, result, row);
+	                case 2:     //view_product(database, result, row);
 	                            break;
 	                case 3:     create_product(database, result, row);
 	                            break;
-	                case 4:     line = view_product(database, result, row);
+	                case 4:     /*line = view_product(database, result, row);
 	                            choice_product = choose_product(database, result, row, line);
-	                            link_product_ingredient(database, result, row, choice_product);
+	                            link_product_ingredient(database, result, row, choice_product);*/
 	                            break;
 	                case 8:     // Power on, open terminals with gtk
 	                            /** INITIALISATION DE GTK **/
@@ -113,14 +114,8 @@ int main(int argc, char **argv){
 
                                 /** JOUEZ AVEC LES POSITIONS DES LIGNES ET DES COLONNES POUR LE POSITIONNEMENT DE VOS BOUTONS **/
 
-                                // NANI ?
-                                /*for(i = 1; i <= 2; i++){
 
-                                }*/
-
-
-                                db.test = 1;
-	                            button = gtk_button_new_with_label("Ramen Pork");
+	                            button = gtk_button_new_with_label(db.name);
                                 image = gtk_image_new_from_file("image/Ramen Pork.jpg");
                                 gtk_table_attach(GTK_TABLE(array), button, 0, 1, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
                                 gtk_container_add (GTK_CONTAINER (button), image);
@@ -128,9 +123,11 @@ int main(int argc, char **argv){
                                 gtk_button_set_image (button,image);
                                 g_signal_connect(button,"clicked", G_CALLBACK (test),&db);
 
+
                                 db_params db2 = db;
-                                db2.test = 2;
-	                            button = gtk_button_new_with_label("Ramen Fish");
+                                db2.id = 2;
+                                search_info(&db2);
+	                            button = gtk_button_new_with_label(db2.name);
 	                            image = gtk_image_new_from_file("image/Ramen Fish.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
@@ -138,92 +135,136 @@ int main(int argc, char **argv){
                                 gtk_button_set_image (button,image);
                                 g_signal_connect(button,"clicked", G_CALLBACK (test),&db2);
 
-                                button = gtk_button_new_with_label("Ramen Beef");
+                                db_params db3 = db;
+                                db3.id = 3;
+                                search_info(&db3);
+                                button = gtk_button_new_with_label(db3.name);
 	                            image = gtk_image_new_from_file("image/Ramen Beef.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 2, 3, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db3);
 
-                                button = gtk_button_new_with_label("Chicken and Rice");
+                                db_params db4 = db;
+                                db4.id = 4;
+                                search_info(&db4);
+                                button = gtk_button_new_with_label(db4.name);
 	                            image = gtk_image_new_from_file("image/Chicken and Rice.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 3, 4, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db4);
 
-                                button = gtk_button_new_with_label("Fish and Rice");
+                                db_params db5 = db;
+                                db5.id = 5;
+                                search_info(&db5);
+                                button = gtk_button_new_with_label(db5.name);
 	                            image = gtk_image_new_from_file("image/Fish and Rice.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 4, 5, 0, 1, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db5);
 
-
-                                button = gtk_button_new_with_label("Yakisoba");
+                                db_params db6 = db;
+                                db6.id = 6;
+                                search_info(&db6);
+                                button = gtk_button_new_with_label(db6.name);
 	                            image = gtk_image_new_from_file("image/Yakisoba.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 1, 2, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db6);
 
-                                button = gtk_button_new_with_label("Tempura");
+                                db_params db7 = db;
+                                db7.id = 7;
+                                search_info(&db7);
+                                button = gtk_button_new_with_label(db7.name);
 	                            image = gtk_image_new_from_file("image/Tempura.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 1, 2, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db7);
 
-                                button = gtk_button_new_with_label("Oden");
+                                db_params db8 = db;
+                                db8.id = 8;
+                                search_info(&db8);
+                                button = gtk_button_new_with_label(db8.name);
 	                            image = gtk_image_new_from_file("image/Oden.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 2, 3, 1, 2, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db8);
 
-                                button = gtk_button_new_with_label("Omuraisu");
+                                db_params db9 = db;
+                                db9.id = 9;
+                                search_info(&db9);
+                                button = gtk_button_new_with_label(db9.name);
 	                            image = gtk_image_new_from_file("image/Omuraisu.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 3, 4, 1, 2, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db9);
 
-                                button = gtk_button_new_with_label("Sushi");
+
+                                db_params db10 = db;
+                                db10.id = 10;
+                                search_info(&db10);
+                                button = gtk_button_new_with_label(db10.name);
 	                            image = gtk_image_new_from_file("image/Sushi.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 4, 5, 1, 2, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db10);
 
-                                button = gtk_button_new_with_label("Katsudon");
+                                db_params db11 = db;
+                                db11.id = 11;
+                                search_info(&db11);
+                                button = gtk_button_new_with_label(db11.name);
 	                            image = gtk_image_new_from_file("image/Katsudon.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 0, 1, 2, 3, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db11);
 
-                                button = gtk_button_new_with_label("Onigiri");
+                                db_params db12 = db;
+                                db12.id = 12;
+                                search_info(&db12);
+                                button = gtk_button_new_with_label(db12.name);
 	                            image = gtk_image_new_from_file("image/Onigiri.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 1, 2, 2, 3, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db12);
 
-                                button = gtk_button_new_with_label("Miso Soup");
+                                db_params db13 = db;
+                                db13.id = 13;
+                                search_info(&db13);
+                                button = gtk_button_new_with_label(db13.name);
 	                            image = gtk_image_new_from_file("image/Miso Soup.jpg");
 	                            gtk_table_attach(GTK_TABLE(array), button, 2, 3, 2, 3, !GTK_EXPAND, !GTK_FILL, 0, 0);
 	                            gtk_container_add (GTK_CONTAINER (button), image);
                                 gtk_button_set_image_position (button,GTK_POS_BOTTOM);
                                 gtk_button_set_image (button,image);
+                                g_signal_connect(button,"clicked", G_CALLBACK (test),&db13);
 
                                 button = gtk_button_new_with_label("Annuler");
                                 gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
                                 g_signal_connect(button,"clicked", G_CALLBACK (button_reset),NULL);
 
-
+                                total total_db = {db, db2, db3, db4, db5};
                                 button = gtk_button_new_with_label("Commander");
                                 gtk_table_attach(GTK_TABLE(array), button, 4, 5, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
-                                g_signal_connect(button,"clicked", G_CALLBACK (button_order),NULL);
+                                g_signal_connect(button,"clicked", G_CALLBACK (total_price),&total_db);
 
 
 	                            sTabLabel = g_strdup_printf("Menu"); /** NOM DE VOTRE ONGLET **/
