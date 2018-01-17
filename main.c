@@ -155,23 +155,8 @@ int main(int argc, char **argv){
             gtk_button_set_image (button,image);
             g_signal_connect(button,"clicked", G_CALLBACK (button_pressed),tab[i]);
 
-            /*view = gtk_text_view_new ();
-            gtk_container_add (GTK_CONTAINER (button), view);
-            buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-            gtk_text_buffer_set_text (buffer, "Hello, this is some text", -1);*/
-
-
-
             j++;
         }
-
-
-
-        TexteConverti = g_locale_to_utf8("Bonjour\n", -1, NULL, NULL, NULL);
-        label = gtk_label_new (TexteConverti);
-        g_free(TexteConverti);
-        gtk_table_attach(GTK_TABLE(array), button, j, j+1, k, k+1, !GTK_EXPAND, !GTK_FILL, 0, 0);
-        gtk_container_add (GTK_CONTAINER (button), label);
 
 
 

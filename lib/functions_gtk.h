@@ -10,13 +10,12 @@ typedef struct button_datas{
     char name[30];
     double price;
     int counter;
-    struct db_params *next;
+    struct db_params *next;         // Next adress of struct in the chain list
 }button_datas;
 
 
 
-
-
+// Add struct for button
 button_datas *add_button_datas(button_datas *start, MYSQL *database, int id_product){
     button_datas *bd;
 
@@ -29,6 +28,7 @@ button_datas *add_button_datas(button_datas *start, MYSQL *database, int id_prod
     return bd;
 }
 
+// Delete struct for button
 button_datas *delete_button_datas(button_datas *start){
     button_datas *del = start;
     if(del != NULL){
@@ -39,14 +39,15 @@ button_datas *delete_button_datas(button_datas *start){
 }
 
 
-
-//Creation fenetre , soucis ici au pasage en fonction
+// Window creation
 void createWinGTK(GtkWidget *window){
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); /** LA FENETRE SERA POSITIONNEEE AU MILIEU **/
     gtk_window_set_default_size(GTK_WINDOW(window), 980, 720); /** DIMENSION DE LA FENETRE **/
     gtk_window_set_title(GTK_WINDOW(window), "CIGMENYO"); /** TITRE DE LA FENETRE **/
 }
 
+
+// When button is pressed : counter++
 void button_pressed(GtkWidget *button, gpointer data){
     button_datas *bd = data;
 
@@ -55,6 +56,7 @@ void button_pressed(GtkWidget *button, gpointer data){
 }
 
 
+// Search infos in database for products
 void search_info(button_datas *db){
 
     int id_ingredient = 0;
@@ -84,37 +86,49 @@ void search_info(button_datas *db){
     }
 }
 
+
+// Total view and print the invoice
 void total_price(GtkWidget *button, gpointer data){
+    char string_db[100];
+    char string_price[10] = "\0";
     int i = 0;
     int id = 0;
     double price = 0;
     button_datas **address = data;      // Retrieve the tab with all the addresses of all the structs
+    MYSQL *database = address[0]->mysql;
 
     // Request orders informations
-    id = orders_max_id(address[0]->mysql) + 1;
-    printf("INVOICE #%d\n", id);
+
+    printf("INVOICE\n");
     for(i = 0; i < 13; i++){
         price += address[i]->counter * address[i]->price;
         if(address[i]->counter > 0)
             printf("\nx%d  %s\n     %.2lf x%d =\t%.2lf",  address[i]->counter, address[i]->name, address[i]->price, address[i]->counter, address[i]->counter * address[i]->price);
     }
     printf("\n===============================\n");
-    printf("TOTAL :\t\t%.2lf euros", price);
+    printf("TOTAL :\t\t%.2lf euros\n", price);
+
     insert_orders_datas(address[0]->mysql, price);
-    file_print(address, id, price);
+    id = orders_max_id(address[0]->mysql);      // Take the actual id
+    file_print(address, id, price);     // Print the invoice
+
 }
 
+
+// Print the invoice
 void file_print(button_datas ** address, int id_invoice, double price){
     char file_name[50];
-    char file_content[500];
-    char inter[100];
+    char file_content[500];     // Final sring for the fwrite
+    char inter[100];            // Intermediate string
     int i = 0;
     FILE *invoice;
 
+    // FILE NAME
     sprintf(file_name, "invoices/INVOICE %d.txt", id_invoice);
     printf("%s", file_name);
     invoice = fopen(file_name, "wt");
 
+    // CONTENT
     sprintf(file_content,"===== INVOICE %d =====\n");
     for(i = 0; i < 13; i++){
         if(address[i]->counter > 0){
@@ -125,13 +139,13 @@ void file_print(button_datas ** address, int id_invoice, double price){
     sprintf(inter, "\n================================\nTOTAL :\t\t%.2lf euros", price);
     strcat(file_content, inter);
 
-
     fwrite(file_content, sizeof(char), strlen(file_content), invoice);
 
     fclose(invoice);
 }
 
 
+// Take the max id_orders in the database
 int orders_max_id(MYSQL *database){
     int id = 0;
     MYSQL_RES *res = NULL;
@@ -154,9 +168,13 @@ int orders_max_id(MYSQL *database){
 
 }
 
+
+// Insert a line in ORDERS table
 void insert_orders_datas(MYSQL *database, double price){
     char string_db[100];
     char string_price[10] = "\0";
+    MYSQL_RES *res = NULL;
+    MYSQL_ROW row = NULL;
 
     sprintf(string_price, "%.2lf", price);
     change_comma_to_point(string_price);
@@ -164,6 +182,7 @@ void insert_orders_datas(MYSQL *database, double price){
 
     sprintf(string_db, "INSERT INTO ORDERS(total_price, id_terminal, id_table) VALUES('%s', 1, 1)", string_price);
     printf("\n%s\n", string_db);
+    //mysql_query(database, "SELECT MAX(id_order) FROM ORDERS");
     mysql_query(database, string_db);
     if((unsigned long)mysql_affected_rows(database) > 1){
         printf("Send failed !\n");
@@ -171,9 +190,10 @@ void insert_orders_datas(MYSQL *database, double price){
         printf("Send success !\n");
     }
     printf("Impression en cours du ticket\n");
-
 }
 
+
+// Change comma to point for double value
 void change_comma_to_point(char *str){
     int i = 0;
     while(str[i] != ',' && i < strlen(str)){
