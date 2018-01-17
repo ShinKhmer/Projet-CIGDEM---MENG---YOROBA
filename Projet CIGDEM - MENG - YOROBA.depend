@@ -84,3 +84,37 @@
 
 1516173603 d:\codeblocks\projects\c\projets\projet 1 - borne restaurant\projet cigdem - meng - yoroba\lib\functions_gtk.h
 
+1516124831 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\ez-draw.c
+	"lib/ez-draw.h"
+
+1516054585 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\ez-draw.h
+	<stdio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<time.h>
+	<sys/time.h>
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xresource.h>
+	<X11/keysym.h>
+	<X11/extensions/Xdbe.h>
+	<windows.h>
+	<windowsx.h>
+	<wingdi.h>
+
+1516180422 source:c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock.h>
+	<MYSQL/mysql.h>
+	<gtk/gtk.h>
+	"lib\functions_gtk.h"
+	"lib\functions.h"
+
+1516180422 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\functions_gtk.h
+
+1516180422 c:\users\azn_j\documents\github\projet-cigdem---meng---yoroba\lib\functions.h
+
