@@ -23,12 +23,6 @@
     GtkWidget *image;
     gchar *sTabLabel;
 
-    GtkWidget* label;
-    gchar* TexteConverti = NULL;
-
-
-    GtkWidget *view;
-    GtkTextBuffer *buffer;
 
 int main(int argc, char **argv){
 
@@ -37,20 +31,15 @@ int main(int argc, char **argv){
     int i = 0;
     int j = 0;
     int k = 0;
-    int cnt = 0;
-    int choice = 0;
-    int choice_product = 0;
-    int line = 0;
+    //int choice = 0;
+    //int choice_product = 0;
+    //int line = 0;
     char string_image[100];
     char string_button[50];
     char string_number[4];
     // tableau a double dimension
     button_datas *start = NULL;
     button_datas *tab[13] = {NULL};
-    button_datas *test_struct = NULL;
-
-    test_struct = malloc(sizeof(button_datas));
-
     // INITIALISATION BDD
     MYSQL *database = NULL;
     database = mysql_init(database);
@@ -64,35 +53,6 @@ int main(int argc, char **argv){
 
     // CONNEXION BDD
     if(mysql_real_connect(database, "localhost", "root", "", "base_restaurant", 0, NULL, 0)){
-
-
-
-
-        //Menu
-        // 0. View ingredients
-        // 1. Add or modify ingredients
-        // 2. View products
-        // 3. Add products
-        // 4. Add existing ingredients to products
-        // 8. Power on terminals
-        // 9. Power off terminals
-        /*while(choice != 9){
-            choice = terminal_print_menu();      // view menu instructions
-
-	            switch(choice){
-	                case 0:     view_ingredient(database, result, row);
-	                            break;
-	                case 1:     insert_ingredients(database, result, row);
-	                            break;
-	                case 2:     view_product(database, result, row);
-	                            break;
-	                case 3:     create_product(database, result, row);
-	                            break;
-	                case 4:     line = view_product(database, result, row);
-	                            choice_product = choose_product(database, result, row, line);
-	                            link_product_ingredient(database, result, row, choice_product);
-	                            break;
-	                case 8:     // Power on, open terminals with gtk*/
 
 
         /** INITIALISATION DE GTK **/
@@ -126,7 +86,6 @@ int main(int argc, char **argv){
 
 
         // Init struct
-        cnt = 0;
         for(i = 0; i < 13; i++){
             if(i!=0 && i%5 == 0){
                 j = 0;
@@ -135,10 +94,7 @@ int main(int argc, char **argv){
 
             start = add_button_datas(start, database, i+1);
             tab[i] = start;
-            test_struct = tab[i];
-            printf("%d", test_struct->id);
             search_info(tab[i]);
-            printf("%s\n", test_struct->name);
 
             strcpy(string_button, tab[i]->name);
             if(tab[i]->counter > 0){
@@ -147,7 +103,7 @@ int main(int argc, char **argv){
                 strcat(string_button, string_number);
             }
             button = gtk_button_new_with_label(string_button);
-            sprintf(string_image, "image/%s.jpg\0", tab[i]->name);
+            sprintf(string_image, "image/%s.jpg", tab[i]->name);
             image = gtk_image_new_from_file(string_image);
             gtk_table_attach(GTK_TABLE(array), button, j, j+1, k, k+1, !GTK_EXPAND, !GTK_FILL, 0, 0);
             gtk_container_add (GTK_CONTAINER (button), image);
@@ -162,9 +118,9 @@ int main(int argc, char **argv){
 
 
 
-        /*button = gtk_button_new_with_label("Cancel");
+        button = gtk_button_new_with_label("Cancel");
         gtk_table_attach(GTK_TABLE(array), button, 3, 4, 3, 4, !GTK_EXPAND, !GTK_FILL, 0, 0);
-        g_signal_connect(button,"clicked", G_CALLBACK (button_reset),tab);*/
+        g_signal_connect(button,"clicked", G_CALLBACK (reset_counter),tab);
 
 
         button = gtk_button_new_with_label("Command");
@@ -183,18 +139,45 @@ int main(int argc, char **argv){
         gtk_widget_show_all(window);
 
         gtk_main();
-	                            /*break;
+
+
+        // Test Menu
+        // 0. View ingredients
+        // 1. Add or modify ingredients
+        // 2. View products
+        // 3. Add products
+        // 4. Add existing ingredients to products
+        // 8. Power on terminals
+        // 9. Power off terminals
+        /*while(choice != 9){
+            choice = terminal_print_menu();      // view menu instructions
+
+	            switch(choice){
+	                case 0:     view_ingredient(database, result, row);
+	                            break;
+	                case 1:     insert_ingredients(database, result, row);
+	                            break;
+	                case 2:     view_product(database, result, row);
+	                            break;
+	                case 3:     create_product(database, result, row);
+	                            break;
+	                case 4:     line = view_product(database, result, row);
+	                            choice_product = choose_product(database, result, row, line);
+	                            link_product_ingredient(database, result, row, choice_product);
+	                            break;
+	                case 8:     // Power on, open terminals with gtk
+                    break;
 	                case 9:     printf("Thank you for using this app !\nPower off the terminal ...");
 	                            break;
 	                default:    break;
 	            }
         }*/
+
         // Free struct
         while(start != NULL){
             start = delete_button_datas(start);
             mysql_close(database);
         }
-        free(test_struct);
     }else{
         printf("Problem while connecting to database !\n");
     }

@@ -1,0 +1,18 @@
+===== INVOICE 11 =====
+
+x1  Ramen Fish
+     16,00 x1 =	16,00
+x1  Ramen Beef
+     16,00 x1 =	16,00
+x1  Oden
+     11,00 x1 =	11,00
+x1  Omuraisu
+     12,00 x1 =	12,00
+x1  Sushi
+     3,00 x1 =	3,00
+x1  Katsudon
+     8,00 x1 =	8,00
+x1  Miso Soup
+     5,00 x1 =	5,00
+================================
+TOTAL :		71,00 euros

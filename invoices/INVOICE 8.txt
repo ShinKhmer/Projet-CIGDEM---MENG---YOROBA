@@ -1,10 +1,10 @@
 ===== INVOICE 8 =====
 
+x1  Ramen Pork
+     16,00 x1 =	16,00
+x1  Ramen Fish
+     16,00 x1 =	16,00
 x1  Tempura
      9,00 x1 =	9,00
-x1  Oden
-     11,00 x1 =	11,00
-x1  Miso Soup
-     5,00 x1 =	5,00
 ================================
-TOTAL :		25,00 euros
+TOTAL :		41,00 euros

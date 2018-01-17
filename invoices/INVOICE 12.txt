@@ -1,0 +1,14 @@
+===== INVOICE 12 =====
+
+x1  Tempura
+     9,00 x1 =	9,00
+x1  Oden
+     11,00 x1 =	11,00
+x1  Omuraisu
+     12,00 x1 =	12,00
+x1  Sushi
+     3,00 x1 =	3,00
+x1  Miso Soup
+     5,00 x1 =	5,00
+================================
+TOTAL :		40,00 euros
