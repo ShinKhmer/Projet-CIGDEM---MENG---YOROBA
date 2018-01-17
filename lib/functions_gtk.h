@@ -104,6 +104,7 @@ void total_price(GtkWidget *button, gpointer data){
         price += address[i]->counter * address[i]->price;
         if(address[i]->counter > 0)
             printf("\nx%d  %s\n     %.2lf x%d =\t%.2lf",  address[i]->counter, address[i]->name, address[i]->price, address[i]->counter, address[i]->counter * address[i]->price);
+            //update_stock(adress[0]->mysql, adress[i]->id, adress[i]->counter);
     }
     printf("\n===============================\n");
     printf("TOTAL :\t\t%.2lf euros\n", price);
@@ -125,7 +126,6 @@ void file_print(button_datas ** address, int id_invoice, double price){
 
     // FILE NAME
     sprintf(file_name, "invoices/INVOICE %d.txt", id_invoice);
-    printf("%s", file_name);
     invoice = fopen(file_name, "wt");
 
     // CONTENT
